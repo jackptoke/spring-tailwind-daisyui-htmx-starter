@@ -1,131 +1,127 @@
 <!DOCTYPE html>
 <html th:lang="|${#locale.language}-${#locale.country}|"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="style-prod.css">
-    <script src="https://unpkg.com/htmx.org@1.9.12" integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2" crossorigin="anonymous"></script>
-</head>
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main}"
+>
 <body>
-<div layout:fragment="content" class="container w-full justify-center">
-    <div class="mx-auto max-w-2xl mt-4">
-        <div class="flex justify-center">
-            <h1 id="text-9xl font-black">Spring Boot + Tailwind CSS + DaisyUI + HTMX</h1>
-        </div>
+    <section layout:fragment="content" class="container w-full justify-center">
+        <div class="mx-auto max-w-2xl mt-4">
+            <div class="flex justify-center">
+                <h1 id="text-9xl font-black">Spring Boot + Tailwind CSS + DaisyUI + HTMX</h1>
+            </div>
 
-        <div class="overflow-x-auto">
-            <table th:fragment="machines" id="machines" hx-swap-oob="true" class="table table-zebra">
-                <thead>
-                <tr>
-                    <th></th>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>IP Address</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr id="machine-detail" class="machine-detail" th:each="machine : ${machines}">
-                    <th class="machine-id" th:text="${machine.getId()}">1</th>
-                    <td class="machine-name" th:text="${machine.getName()}">Cy Ganderton</td>
-                    <td class="machine-description" th:text="${machine.getDescription()}">Quality Control Specialist</td>
-                    <td th:class="machine-ip" th:text="${machine.getIpAddress()}">Blue</td>
-                    <td class="buttons">
-                        <button
-                                class="btn btn-outline btn-error btn-sm"
-                                th:attr="hx-delete=@{/machines/{id}(id=${machine.id})}"
-                                hx-swap="outerHTML"
-                                hx-target="closest #machine-detail"
-                        >
-                            Delete
-                        </button>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            <div th:fragment="machine-form" id="machine-form" hx-swap-oob="true" class="flex flex-col gap-1 mt-10 mb-10 gap-2">
-                <div></div>
-                <div class="w-full flex justify-center px-3 items-stretch">
-                    <label class="input input-bordered flex items-center gap-2">
-                        Machine Name
-                        <input type="text" class="grow" placeholder="Machine name" name="machineName" id="machineName" />
-                    </label>
+            <div class="overflow-x-auto">
+                <table th:fragment="machines" id="machines" hx-swap-oob="true" class="table table-zebra">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>IP Address</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr id="machine-detail" class="machine-detail" th:each="machine : ${machines}">
+                        <th class="machine-id" th:text="${machine.getId()}">1</th>
+                        <td class="machine-name" th:text="${machine.getName()}">Cy Ganderton</td>
+                        <td class="machine-description" th:text="${machine.getDescription()}">Quality Control Specialist</td>
+                        <td th:class="machine-ip" th:text="${machine.getIpAddress()}">Blue</td>
+                        <td class="buttons">
+                            <button
+                                    class="btn btn-outline btn-error btn-sm"
+                                    th:attr="hx-delete=@{/machines/{id}(id=${machine.id})}"
+                                    hx-swap="outerHTML"
+                                    hx-target="closest #machine-detail"
+                            >
+                                Delete
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div th:fragment="machine-form" id="machine-form" hx-swap-oob="true" class="flex flex-col gap-1 mt-10 mb-10 gap-2">
+                    <div></div>
+                    <div class="w-full flex justify-center px-3 items-stretch">
+                        <label class="input input-bordered flex items-center gap-2">
+                            Machine Name
+                            <input type="text" class="grow" placeholder="Machine name" name="machineName" id="machineName" />
+                        </label>
+                    </div>
+                    <div class="w-full flex justify-center px-3">
+                        <label class="input input-bordered flex items-center gap-2">
+                            Name
+                            <input type="text" class="grow" placeholder="Machine description" name="machineDescription" id="machineDescription" />
+                        </label>
+                    </div>
+                    <div class="w-full flex justify-center px-3">
+                        <label class="input input-bordered flex items-center gap-2">
+                            Name
+                            <input type="text" class="grow" placeholder="10.0.2.1" name="machineIp" id="machineIp"/>
+                        </label>
+                    </div>
+                    <div class="w-full flex justify-center">
+                        <button class="btn btn-primary" type="submit"
+                                th:hx-post="@{/machines}" hx-include="#machineName, #machineDescription, #machineIp"
+                                hx-target="#machines"
+                        >Submit</button>
+                    </div>
                 </div>
-                <div class="w-full flex justify-center px-3">
-                    <label class="input input-bordered flex items-center gap-2">
-                        Name
-                        <input type="text" class="grow" placeholder="Machine description" name="machineDescription" id="machineDescription" />
-                    </label>
-                </div>
-                <div class="w-full flex justify-center px-3">
-                    <label class="input input-bordered flex items-center gap-2">
-                        Name
-                        <input type="text" class="grow" placeholder="10.0.2.1" name="machineIp" id="machineIp"/>
-                    </label>
-                </div>
-                <div class="w-full flex justify-center">
-                    <button class="btn btn-primary" type="submit"
-                            th:hx-post="@{/machines}" hx-include="#machineName, #machineDescription, #machineIp"
+                <div class="w-full justify-center">
+                    <button class="btn btn-error"
+                            th:hx-post="@{/machines/reset}"
                             hx-target="#machines"
-                    >Submit</button>
+                    >Reset</button>
                 </div>
-            </div>
-            <div class="w-full justify-center">
-                <button class="btn btn-error"
-                        th:hx-post="@{/machines/reset}"
-                        hx-target="#machines"
-                >Reset</button>
-            </div>
 
-        </div>
-        <div class="float-right bg-amber-400 p-2">
-            <div id="message" class="text-white text-2xl font-bold">Request Info</div>
-        </div>
-        <h1 class="text-2xl mb=4">Trigger Demo</h1>
-        <h2 class="text-xl mb-2">Standard Events</h2>
-        <div class="mb-4">
-            <div class="text-sm">Button is triggered by the <code class="font-mono">Click</code> event.</div>
-            <button class="btn btn-outline btn-primary"
-                    th:hx-get="@{/htmx}"
-                    hx-target="#message">Click me</button>
-        </div>
-        <div class="mb-4">
-            <div class="text-sm">Input, textarea and select fields are triggered by the <code class="font-mono">change</code> event (For input and textarea, this triggers when you move the focus out of the input).</div>
-            <div>
+            </div>
+            <div class="float-right bg-amber-400 p-2">
+                <div id="message" class="text-white text-2xl font-bold">Request Info</div>
+            </div>
+            <h1 class="text-2xl mb=4">Trigger Demo</h1>
+            <h2 class="text-xl mb-2">Standard Events</h2>
+            <div class="mb-4">
+                <div class="text-sm">Button is triggered by the <code class="font-mono">Click</code> event.</div>
+                <button class="btn btn-outline btn-primary"
+                        th:hx-get="@{/htmx}"
+                        hx-target="#message">Click me</button>
+            </div>
+            <div class="mb-4">
+                <div class="text-sm">Input, textarea and select fields are triggered by the <code class="font-mono">change</code> event (For input and textarea, this triggers when you move the focus out of the input).</div>
                 <div>
-                    <div>Input</div>
-                    <input id="my-text-input-id"
-                           type="text"
-                           name="my-text-input-name"
-                           class="mb-2"
-                           th:hx-get="@{/htmx}"
-                           hx-target="#message" />
+                    <div>
+                        <div>Input</div>
+                        <input id="my-text-input-id"
+                               type="text"
+                               name="my-text-input-name"
+                               class="mb-2"
+                               th:hx-get="@{/htmx}"
+                               hx-target="#message" />
+                    </div>
+                    <div>
+                        <div>Textarea</div>
+                        <textarea th:hx-get="@{/htmx}"
+                                  hx-target="#message"></textarea>
+                    </div>
+                    <div>Select</div>
+                    <select th:hx-get="@{/htmx}"
+                            hx-target="#message">
+                        <option>Choice 1</option>
+                        <option>Choice 2</option>
+                        <option>Choice 3</option>
+                    </select>
                 </div>
-                <div>
-                    <div>Textarea</div>
-                    <textarea th:hx-get="@{/htmx}"
-                              hx-target="#message"></textarea>
-                </div>
-                <div>Select</div>
-                <select th:hx-get="@{/htmx}"
-                        hx-target="#message">
-                    <option>Choice 1</option>
-                    <option>Choice 2</option>
-                    <option>Choice 3</option>
-                </select>
+            </div>
+            <div class="mb-4">
+                <div class="text-sm">Forms are triggered by the <code class="font-mon">submit</code> event.</div>
+                <form th:hx-get="@{/htmx}"
+                      hx-target="#message">
+                    <input type="text" name="form-text-input" />
+                    <button class="btn btn-ghost" type="submit">Submit</button>
+                    <button class="btn btn-outline btn-warning">Reset</button>
+                </form>
             </div>
         </div>
-        <div class="mb-4">
-            <div class="text-sm">Forms are triggered by the <code class="font-mon">submit</code> event.</div>
-            <form th:hx-get="@{/htmx}"
-                  hx-target="#message">
-                <input type="text" name="form-text-input" />
-                <button class="btn btn-ghost" type="submit">Submit</button>
-                <button class="btn btn-outline btn-warning">Reset</button>
-            </form>
-        </div>
-    </div>
-</div>
+    </section>
 </body>
 </html>
