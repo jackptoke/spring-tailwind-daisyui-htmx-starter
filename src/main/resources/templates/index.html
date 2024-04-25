@@ -9,15 +9,14 @@
     <script src="https://unpkg.com/htmx.org@1.9.12" integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2" crossorigin="anonymous"></script>
 </head>
 <body>
-<div layout:fragment="content" class="container mx-auto mt-10">
-    <div class="flex flex-col gap-4">
+<div layout:fragment="content" class="container w-full justify-center">
+    <div class="mx-auto max-w-2xl mt-4">
         <div class="flex justify-center">
             <h1 id="text-9xl font-black">Spring Boot + Tailwind CSS + DaisyUI + HTMX</h1>
         </div>
 
         <div class="overflow-x-auto">
-            <table class="table table-zebra">
-                <!-- head -->
+            <table th:fragment="machines" id="machines" hx-swap-oob="true" class="table table-zebra">
                 <thead>
                 <tr>
                     <th></th>
@@ -27,18 +26,17 @@
                 </tr>
                 </thead>
                 <tbody>
-                <!-- row 1 -->
-                <tr class="machines" th:each="machine : ${machines}">
+                <tr id="machine-detail" class="machine-detail" th:each="machine : ${machines}">
                     <th class="machine-id" th:text="${machine.getId()}">1</th>
                     <td class="machine-name" th:text="${machine.getName()}">Cy Ganderton</td>
                     <td class="machine-description" th:text="${machine.getDescription()}">Quality Control Specialist</td>
                     <td th:class="machine-ip" th:text="${machine.getIpAddress()}">Blue</td>
                     <td class="buttons">
                         <button
-                            class="btn btn-outline btn-error btn-sm"
-                            th:attr="hx-delete=@{/machines/{id}(id=${machine.id})}"
-                            hx-swap="outerHTML"
-                            hx-target="closest .machines"
+                                class="btn btn-outline btn-error btn-sm"
+                                th:attr="hx-delete=@{/machines/{id}(id=${machine.id})}"
+                                hx-swap="outerHTML"
+                                hx-target="closest #machine-detail"
                         >
                             Delete
                         </button>
@@ -46,9 +44,43 @@
                 </tr>
                 </tbody>
             </table>
+            <div th:fragment="machine-form" id="machine-form" hx-swap-oob="true" class="flex flex-col gap-1 mt-10 mb-10 gap-2">
+                <div></div>
+                <div class="w-full flex justify-center px-3 items-stretch">
+                    <label class="input input-bordered flex items-center gap-2">
+                        Machine Name
+                        <input type="text" class="grow" placeholder="Machine name" name="machineName" id="machineName" />
+                    </label>
+                </div>
+                <div class="w-full flex justify-center px-3">
+                    <label class="input input-bordered flex items-center gap-2">
+                        Name
+                        <input type="text" class="grow" placeholder="Machine description" name="machineDescription" id="machineDescription" />
+                    </label>
+                </div>
+                <div class="w-full flex justify-center px-3">
+                    <label class="input input-bordered flex items-center gap-2">
+                        Name
+                        <input type="text" class="grow" placeholder="10.0.2.1" name="machineIp" id="machineIp"/>
+                    </label>
+                </div>
+                <div class="w-full flex justify-center">
+                    <button class="btn btn-primary" type="submit"
+                            th:hx-post="@{/machines}" hx-include="#machineName, #machineDescription, #machineIp"
+                            hx-target="#machines"
+                    >Submit</button>
+                </div>
+            </div>
+            <div class="w-full justify-center">
+                <button class="btn btn-error"
+                        th:hx-post="@{/machines/reset}"
+                        hx-target="#machines"
+                >Reset</button>
+            </div>
+
         </div>
         <div class="float-right bg-amber-400 p-2">
-            <div id="message">Request Info</div>
+            <div id="message" class="text-white text-2xl font-bold">Request Info</div>
         </div>
         <h1 class="text-2xl mb=4">Trigger Demo</h1>
         <h2 class="text-xl mb-2">Standard Events</h2>

@@ -1,5 +1,6 @@
 package dev.toke.springthymehtmxstarter.utils;
 
+import dev.toke.springthymehtmxstarter.events.ResetMachineDataEvent;
 import dev.toke.springthymehtmxstarter.model.Machine;
 import dev.toke.springthymehtmxstarter.repository.MachineRepo;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +15,7 @@ import java.util.stream.Stream;
 public class Initializer {
     private final MachineRepo machineRepo;
 
-    @EventListener(ApplicationReadyEvent.class)
+    @EventListener({ ApplicationReadyEvent.class, ResetMachineDataEvent.class})
     void reset() {
         machineRepo.deleteAll();
         Stream.of(new Machine(null, "Kappa1", "The Kappa 350 - A", "10.168.1.25"),
