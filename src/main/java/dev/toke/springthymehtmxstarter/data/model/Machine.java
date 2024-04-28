@@ -1,4 +1,4 @@
-package dev.toke.springthymehtmxstarter.model;
+package dev.toke.springthymehtmxstarter.data.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;

@@ -1,6 +1,6 @@
 package dev.toke.springthymehtmxstarter.repository;
 
-import dev.toke.springthymehtmxstarter.model.Machine;
+import dev.toke.springthymehtmxstarter.data.model.Machine;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

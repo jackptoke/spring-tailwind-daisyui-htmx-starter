@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html th:lang="|${#locale.language}-${#locale.country}|"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main}"
+>
+<body>
+<section layout:fragment="content" class="container w-5/6 h-screen mx-auto mb-auto">
+    <div class="space-y-12">
+        <div class="py-12">
+            <div class="navbar bg-base-100">
+                <div class="flex-1">
+                    <a class="btn btn-ghost text-xl">Users</a>
+                </div>
+                <div class="flex-none">
+                    <button class="btn btn-ghost" onclick="my_modal_3.showModal()">
+                        New User
+                    </button>
+                </div>
+            </div>
+        <div class="overflow-x-auto">
+            <table th:fragment="users" id="users" class="table table-zebra">
+                <!-- head -->
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Is Active</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- row 1 -->
+                <tr id="user-detail" class="user-detail"
+                    th:each="user : ${ users }">
+                    <th th:text="${user.id()}">1</th>
+                    <td th:text="${user.username()}">Cy Ganderton</td>
+                    <td th:text="${user.email()}">Quality Control Specialist</td>
+                    <td>
+                        <input type="checkbox" class="toggle toggle-success" th:checked="${ user.isActive() }" />
+                    </td>
+                    <td>
+                        <button
+                                class="btn btn-outline btn-error btn-sm"
+                                hx-swap="outerHTML"
+                                th:hx-delete="@{/users/{username}(username=${user.username()})}"
+                                hx-target="closest #users"
+                        >
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+            <div th:fragment="user-form-dialog" id="user-form-dialog" class="user-form-dialog">
+                <dialog id="my_modal_3" class="modal modal-bottom sm:modal-middle">
+                    <div class="modal-box">
+                        <form method="dialog">
+                            <button class="btn btn-sm btn-circle btn-error absolute right-2 top-2">✕</button>
+                        </form>
+                        <form method="dialog" id="user-form" th:object="${user}"
+                              hx-post="/users"
+                              hx-target="#users"
+                              hx-swap-oob="true"
+                        >
+                            <div class="grid grid-cols-3 gap-6 mt-10">
+                                <label>Email</label>
+                                <input id="user-email" type="text" name="email"
+                                       class="input input-bordered w-full max-w-xs col-span-2"
+                                       placeholder="Email"
+                                       th:field="*{email}"
+                                />
+
+                                <label>Username</label>
+                                <input id="user-username" type="text" name="username"
+                                       class="input input-bordered w-full max-w-xs col-span-2"
+                                       placeholder="Username"
+                                       th:field="*{username}"
+                                />
+
+                                <label>Password</label>
+                                <input id="user-password" type="password"
+                                       class="input input-bordered w-full max-w-xs  col-span-2"
+                                       th:field="*{password}" />
+
+                                <div>
+                                </div>
+
+                                <button class="btn btn-outline"
+                                        type="submit"
+                                >Save</button>
+
+                                <button class="btn btn-outline btn-secondary" type="reset">Clear</button>
+                                <input id="user-active" type="hidden" checked="checked" class="checkbox" th:field="*{isActive}"  />
+                            </div>
+                        </form>
+                    </div>
+                </dialog>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

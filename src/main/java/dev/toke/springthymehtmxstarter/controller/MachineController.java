@@ -1,7 +1,7 @@
 package dev.toke.springthymehtmxstarter.controller;
 
 import dev.toke.springthymehtmxstarter.events.ResetMachineDataEvent;
-import dev.toke.springthymehtmxstarter.model.Machine;
+import dev.toke.springthymehtmxstarter.data.model.Machine;
 import dev.toke.springthymehtmxstarter.repository.MachineRepo;
 import io.github.wimdeblauwe.htmx.spring.boot.mvc.HtmxResponse;
 import lombok.RequiredArgsConstructor;
