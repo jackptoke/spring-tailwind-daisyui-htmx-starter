@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html th:lang="|${#locale.language}-${#locale.country}|"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main}"
+>
+<body>
+    <section layout:fragment="content" id="machine_page_content" class="container mx-auto mt-4 min-h-dvh w-full z-0 flex flex-col">
+        <div class="flex justify-between">
+            <h1 id="text-xl font-black grow-0">Machines</h1>
+            <div class="grow"></div>
+            <div class="grow-0">
+                <button class="btn btn-primary"
+                        th:hx-get="@{/machines/new}"
+                        hx-target="#machine_page_content"
+                >
+                    New Machine
+                </button>
+            </div>
+        </div>
+
+        <div class="overflow-x-auto" >
+            <table th:fragment="machines" id="machines" hx-swap-oob="true" class="table table-zebra">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Brand</th>
+                    <th>Model</th>
+                    <th>Is Active</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr id="machine-detail" class="machine-detail" th:each="machine : ${machines}">
+                    <th th:text="${machine.getId()}">1</th>
+                    <td th:text="${machine.getName()}">Cy Ganderton</td>
+                    <td th:text="${machine.getDescription()}">Quality Control Specialist</td>
+                    <td th:text="${machine.getBrand()}">Blue</td>
+                    <td th:text="${machine.getModel()}"></td>
+                    <td>
+                        <input type="checkbox" class="toggle toggle-success" th:checked="${ machine.getIsActive() }" />
+                    </td>
+                    <td class="buttons">
+                        <div
+                                class="btn btn-outline btn-primary btn-sm"
+                                th:hx-get="@{/machines/{id}(id=${machine.getId()})}"
+                                hx-target="#machine_page_content"
+                        >
+                            Edit
+                        </div>
+                        <button
+                                class="btn btn-outline btn-error btn-sm"
+                                th:attr="hx-delete=@{/machines/{id}(id=${machine.id})}"
+                                hx-swap="outerHTML"
+                                hx-target="closest #machine-detail"
+                        >
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</body>
+</html>

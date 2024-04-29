@@ -6,10 +6,10 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title></title>
-        <link rel="stylesheet" href="style-prod.css">
+        <link rel="stylesheet" th:href="@{style-prod.css}">
         <script src="https://unpkg.com/htmx.org@1.9.12" integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2" crossorigin="anonymous"></script>
     </head>
-    <body>
+    <body data-theme="ame_theme">
         <section>
             <div class="navbar bg-base-100">
                 <div class="flex-none">
@@ -26,8 +26,9 @@
                             <label for="my-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
                             <ul class="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
                                 <!-- Sidebar content here -->
-                                <li><a>Sidebar Item 1</a></li>
-                                <li><a>Sidebar Item 2</a></li>
+                                <li><a href="/" target="_self">Home</a></li>
+                                <li><a href="/users" target="_self">Users</a></li>
+                                <li><a href="/machines" target="_self">Machines</a></li>
 
                             </ul>
                         </div>

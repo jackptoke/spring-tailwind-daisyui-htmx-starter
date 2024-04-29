@@ -4,93 +4,9 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/main}"
 >
-<body>
+<body >
     <section layout:fragment="content" class="container w-full justify-center z-0">
-        <div class="mx-auto max-w-2xl mt-4">
-            <div class="flex justify-center">
-                <h1 id="text-xl font-black">Spring Boot + Tailwind CSS + DaisyUI + HTMX</h1>
-            </div>
-
-            <div class="overflow-x-auto">
-                <table th:fragment="machines" id="machines" hx-swap-oob="true" class="table table-zebra">
-                    <thead>
-                    <tr>
-                        <th></th>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>IP Address</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr id="machine-detail" class="machine-detail" th:each="machine : ${machines}">
-                        <th class="machine-id" th:text="${machine.getId()}">1</th>
-                        <td class="machine-name" th:text="${machine.getName()}">Cy Ganderton</td>
-                        <td class="machine-description" th:text="${machine.getDescription()}">Quality Control Specialist</td>
-                        <td th:class="machine-ip" th:text="${machine.getIpAddress()}">Blue</td>
-                        <td class="buttons">
-                            <button
-                                    class="btn btn-outline btn-error btn-sm"
-                                    th:attr="hx-delete=@{/machines/{id}(id=${machine.id})}"
-                                    hx-swap="outerHTML"
-                                    hx-target="closest #machine-detail"
-                            >
-                                Delete
-                            </button>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-                <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
-                    <button class="btn btn-error btn-outline btn-sm"
-                            th:hx-post="@{/machines/reset}"
-                            hx-target="#machines"
-                    >Reset</button>
-                </div>
-                <!-- Machine Form -->
-                <div class="flex min-h-full flex-col justify-center px-6 py-6 lg:px-8">
-                    <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-                        <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-white">Add New Machine</h2>
-                    </div>
-                    <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm"  th:fragment="machine-form"
-                         id="machine-form" hx-swap-oob="true">
-                        <form class="space-y-6">
-                            <div>
-                                <label for="machineName" class="block text-sm font-medium leading-6 text-white">Machine Name</label>
-                                <div class="mt-2">
-                                    <input id="machineName" name="machineName" type="text" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                                </div>
-                            </div>
-                            <div>
-                                <div class="flex items-center justify-between">
-                                    <label for="machineDescription" class="block text-sm font-medium leading-6 text-white">Description</label>
-                                </div>
-                                <div class="mt-2">
-                                    <input id="machineDescription" name="machineDescription" type="text" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                                </div>
-                            </div>
-
-                            <div>
-                                <div class="flex items-center justify-between">
-                                    <label for="machineIp" class="block text-sm font-medium leading-6 text-white">IP Address</label>
-                                </div>
-                                <div class="mt-2">
-                                    <input id="machineIp" name="machineIp" type="text" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                                </div>
-                            </div>
-
-                            <div>
-                                <button
-                                        type="submit"
-                                        class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                                        th:hx-post="@{/machines}" hx-include="#machineName, #machineDescription, #machineIp"
-                                        hx-target="#machines"
-                                >Sign in</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <h1>Home page</h1>
     </section>
 </body>
 </html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="machine_form" >
+
+        <div th:fragment="machine-form" id="machine-form" class="machine-form flex justify-center">
+
+            <form method="dialog" th:object="${machine}"
+                  th:hx-post="@{/machines}"
+                  hx-target="#machine_page_content"
+            >
+                <div class="grid grid-cols-3 gap-6 mt-10">
+                    <div class="col-span-3" th:text="${page_title}"></div>
+                    <label>Machine Name</label>
+                    <input id="machine-name" type="text" name="machine-name"
+                           class="input input-bordered w-full max-w-xs col-span-2"
+                           placeholder="Name of the machine"
+                           th:field="*{machineName}"
+                    />
+
+                    <label>Description</label>
+                    <input id="machine-description" type="text" name="machine-description"
+                           class="input input-bordered w-full max-w-xs col-span-2"
+                           placeholder="Description"
+                           th:field="*{description}"
+                    />
+
+                    <label>Brand</label>
+                    <input id="machine-brand" type="text" name="machine-brand"
+                           class="input input-bordered w-full max-w-xs col-span-2"
+                           placeholder="Description"
+                           th:field="*{machineBrand}"
+                    />
+
+                    <label>Brand</label>
+                    <input id="machine-model" type="text" name="machine-model"
+                           class="input input-bordered w-full max-w-xs col-span-2"
+                           placeholder="Model"
+                           th:field="*{machineModel}"
+                    />
+
+                    <label>Brand</label>
+                    <input id="machine-data-path" type="text" name="machine-data-path"
+                           class="input input-bordered w-full max-w-xs col-span-2"
+                           placeholder="WPCS Data path"
+                           th:field="*{dataPath}"
+                    />
+
+                    <label>Brand</label>
+                    <input id="machine-feedback-path" type="text" name="machine-feedback-path"
+                           class="input input-bordered w-full max-w-xs col-span-2"
+                           placeholder="WPCS feedback path"
+                           th:field="*{feedbackPath}"
+                    />
+
+                    <label>Is Active</label>
+                    <input id="machine-isActive" type="checkbox" name="machine-isActive"
+                            class="checkbox checkbox-primary col-span-2"
+                           th:checked="*{isActive}"
+
+                    />
+
+                    <label>Can Change Cable</label>
+                    <input id="machine-canChangeCable" type="checkbox" name="machine-isActive"
+                           class="checkbox checkbox-primary col-span-2"
+                           th:checked="*{canChangeCable}"
+                    />
+
+                    <label>Can Change Terminal</label>
+                    <input id="machine-canChangeTerminal" type="checkbox" name="machine-isActive"
+                           class="checkbox checkbox-primary col-span-2"
+                           th:checked="*{canChangeTerminal}"
+                    />
+
+                    <label>Can Cut and Strip</label>
+                    <input id="machine-canCutAndStrip" type="checkbox" name="machine-isActive"
+                           class="checkbox checkbox-primary col-span-2"
+                           th:checked="*{canCutAndStrip}"
+                    />
+
+                    <label>Cable Threshold</label>
+                    <input id="machine-feedback-path" type="number" name="machine-feedback-path"
+                           class="input input-bordered w-full max-w-xs col-span-2"
+                           placeholder="40"
+                           min="5"
+                           max="100"
+                           value="40"
+                           th:field="*{cableThreshold}"
+                    />
+
+                    <label>Terminal and Seal Threshold</label>
+                    <input id="machine-feedback-path" type="number" name="machine-feedback-path"
+                           class="input input-bordered w-full max-w-xs col-span-2"
+                           placeholder="40"
+                           min="5"
+                           max="100"
+                           value="40"
+                           th:field="*{termAndSealThreshold}"
+                    />
+
+                    <label>Minimum Length</label>
+                    <input id="machine-feedback-path" type="number" name="machine-feedback-path"
+                           class="input input-bordered w-full max-w-xs col-span-2"
+                           placeholder="60"
+                           min="60"
+                           max="1000"
+                           value="200"
+                           th:field="*{minimumLength}"
+                    />
+
+                    <label>Maximum Length</label>
+                    <input id="machine-feedback-path" type="number" name="machine-feedback-path"
+                           class="input input-bordered w-full max-w-xs col-span-2"
+                           placeholder="60"
+                           min="60"
+                           max="25000"
+                           value="5000"
+                           th:field="*{maximumLength}"
+                    />
+
+                    <label>Print Colour</label>
+                    <select class="select select-bordered w-full max-w-xs col-span-2" th:value="*{printColour}">
+                        <option disabled selected>Print Colour?</option>
+                        <option value="WHITE">WHITE</option>
+                        <option value="BLACK">BLACK</option>
+                        <option value="BOTH">BOTH</option>
+                        <option value="NONE">NONE</option>
+                    </select>
+
+                    <div></div>
+                    <div class="w-full"> </div>
+                    <div class="mx-auto w-full ">
+                        <button class="btn btn-outline"
+                                type="submit"
+                        >Save</button>
+
+                        <button id="cancel-button"
+                                class="btn btn-outline btn-secondary"
+                                th:hx-get="@{/machines/redirect}"
+                                hx-target="#machine_page_content"
+                        >Cancel</button>
+                    </div>
+                    <div class="w-full"> </div>
+
+                    <input id="user-active" type="hidden" checked="checked" class="checkbox" th:field="*{isActive}"  />
+                </div>
+            </form>
+    </div>
+</div>
+</body>
+</html>

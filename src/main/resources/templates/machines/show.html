@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html th:lang="|${#locale.language}-${#locale.country}|"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main}">
+<body>
+    <div layout:fragment="content" class="container w-5/6 h-screen mx-auto mb-auto">
+        <div class="flex justify-between">
+            <h1 id="text-xl font-black grow-0">Machines</h1>
+            <div class="grow"></div>
+            <div class="grow-0">
+                <div class="btn btn-primary">
+                    Machine details 2
+                </div>
+            </div>
+        </div>
+<!--        <div class="overflow-x-auto">-->
+<!--            <div th:fragment="machine-form" id="machine-form" class="machine-form">-->
+<!--                <form method="dialog" th:object="${machine}"-->
+<!--                      hx-post="/machines"-->
+<!--                      hx-target="#machine-form"-->
+<!--                >-->
+<!--                    <div class="grid grid-cols-3 gap-6 mt-10">-->
+<!--                        <label>Email</label>-->
+<!--                        <input id="user-email" type="text" name="machine-name"-->
+<!--                               class="input input-bordered w-full max-w-xs col-span-2"-->
+<!--                               placeholder="Email"-->
+<!--                               th:field="*{machineName}"-->
+<!--                        />-->
+
+<!--                        <label>Description</label>-->
+<!--                        <input id="machine-description" type="text" name="machine-description"-->
+<!--                               class="input input-bordered w-full max-w-xs col-span-2"-->
+<!--                               placeholder="Description"-->
+<!--                               th:field="*{description}"-->
+<!--                        />-->
+
+<!--                        <label>Brand</label>-->
+<!--                        <input id="machine-brand" type="text" name="machine-brand"-->
+<!--                               class="input input-bordered w-full max-w-xs col-span-2"-->
+<!--                               placeholder="Description"-->
+<!--                               th:field="*{machineBrand}"-->
+<!--                        />-->
+
+<!--                        <label>Brand</label>-->
+<!--                        <input id="machine-model" type="text" name="machine-model"-->
+<!--                               class="input input-bordered w-full max-w-xs col-span-2"-->
+<!--                               placeholder="Model"-->
+<!--                               th:field="*{machineModel}"-->
+<!--                        />-->
+
+<!--                        <label>Brand</label>-->
+<!--                        <input id="machine-data-path" type="text" name="machine-data-path"-->
+<!--                               class="input input-bordered w-full max-w-xs col-span-2"-->
+<!--                               placeholder="WPCS Data path"-->
+<!--                               th:field="*{dataPath}"-->
+<!--                        />-->
+
+<!--                        <label>Brand</label>-->
+<!--                        <input id="machine-feedback-path" type="text" name="machine-feedback-path"-->
+<!--                               class="input input-bordered w-full max-w-xs col-span-2"-->
+<!--                               placeholder="WPCS feedback path"-->
+<!--                               th:field="*{feedbackPath}"-->
+<!--                        />-->
+
+<!--                        <label>Brand</label>-->
+<!--                        <input id="machine-isActive" type="checkbox" name="machine-isActive"-->
+<!--                               class="input input-bordered w-full max-w-xs col-span-2"-->
+<!--                               th:checked="*{isActive}"-->
+<!--                        />-->
+
+<!--                        <button class="btn btn-outline"-->
+<!--                                type="submit"-->
+<!--                        >Save</button>-->
+
+<!--                        <button class="btn btn-outline btn-secondary" type="reset">Clear</button>-->
+<!--                        <input id="user-active" type="hidden" checked="checked" class="checkbox" th:field="*{isActive}"  />-->
+<!--                    </div>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--        </div>-->
+</div>
+</body>
+</html>
