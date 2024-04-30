@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html th:lang="|${#locale.language}-${#locale.country}|"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main}"
+>
+<body>
+    <section layout:fragment="content" id="plan_page_content" class="container mx-auto mt-4 min-h-dvh w-full z-0 flex flex-col">
+        <div class="flex justify-between">
+            <h1 id="text-xl font-black grow-0">Machines</h1>
+            <div class="grow"></div>
+            <div class="grow-0">
+                <button class="btn btn-primary"
+                        th:hx-get="@{/plans/new}"
+                        hx-target="#plan_page_content"
+                >
+                    New Plan
+                </button>
+            </div>
+        </div>
+
+        <div class="overflow-x-auto" >
+            <table th:fragment="machines" id="machines" hx-swap-oob="true" class="table table-zebra">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Brand</th>
+                    <th>Model</th>
+                    <th>Is Active</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr id="machine-detail" class="machine-detail" th:each="plan : ${plans}">
+                    <th th:text="${plan.getId()}">1</th>
+                    <td th:text="${plan.getDescription()}"></td>
+                    <td th:text="${plan.getStartDate()}">Blue</td>
+                    <td th:text="${plan.getRunDate()}"></td>
+                    <td class="buttons">
+                        <div
+                                class="btn btn-outline btn-primary btn-sm"
+                                th:hx-get="@{/plans/{id}(id=${plan.getId()})}"
+                                hx-target="#machine_page_content"
+                        >
+                            Edit
+                        </div>
+                        <button
+                                class="btn btn-outline btn-error btn-sm"
+                                th:attr="hx-delete=@{/machines/{id}(id=${plan.getId()})}"
+                                hx-swap="outerHTML"
+                                hx-target="closest #machine-detail"
+                        >
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</body>
+</html>

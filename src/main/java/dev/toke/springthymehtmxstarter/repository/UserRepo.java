@@ -9,10 +9,10 @@ import java.util.List;
 
 @Repository
 public interface UserRepo extends JpaRepository<User, Long> {
-    @Query(value = "SELECT * FROM AME_USER WHERE username = :username", nativeQuery = true)
+    @Query(value = "SELECT * FROM AmeUser WHERE username = :username", nativeQuery = true)
     User findByUsername(String username);
-    @Query(value = "SELECT * FROM AME_USER WHERE email = :email", nativeQuery = true)
+    @Query(value = "SELECT * FROM AmeUser WHERE email = :email", nativeQuery = true)
     User findByEmail(String email);
-    @Query(value = "SELECT * FROM AME_USER WHERE isActive = :isActive", nativeQuery = true)
+    @Query(value = "SELECT * FROM AmeUser WHERE isActive = :isActive", nativeQuery = true)
     List<User> findUsersByIsActive(boolean isActive);
 }

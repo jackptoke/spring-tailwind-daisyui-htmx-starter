@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<div th:fragment="datepicker(year, month, day, firstDay, lastDay)" class="grid grid-cols-3 gap-5 text-center">
+
+    <div class="flex flex-col">
+        <input type="number" th:placeholder="${day}" th:value="${day}" class="input input-bordered input-sm items-center" />
+        Day
+    </div>
+    <div class="flex flex-col justify-center">
+        <input type="number" th:placeholder="${month}" th:value="${month}" class="input input-bordered input-sm items-center" />
+        Month
+    </div>
+    <div class="flex flex-col">
+        <input type="number" th:placeholder="${year}" th:value="${year}"
+               class="input input-bordered input-sm items-center" />
+        Year
+    </div>
+</div>
+</html>
