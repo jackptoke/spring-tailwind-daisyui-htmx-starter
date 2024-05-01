@@ -1,6 +1,7 @@
 package dev.toke.springthymehtmxstarter.controller;
 
 import dev.toke.springthymehtmxstarter.data.dto.PlanFormData;
+import dev.toke.springthymehtmxstarter.data.model.PlanPriority;
 import dev.toke.springthymehtmxstarter.service.WorkPlanService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -40,6 +41,8 @@ public class PlanController {
                 "lastDay", date.with(TemporalAdjusters
                                             .lastDayOfMonth())
                                             .getDayOfMonth());
+        model.addAttribute("priorities", PlanPriority.values());
+
         return "plans/new_plan";
     }
 

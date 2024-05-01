@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 
 @Controller
 @RequestMapping("/machines")
@@ -110,17 +111,11 @@ public class MachineController {
                     machineData.getDataPath(),
                     machineData.getFeedbackPath(),
                     machineData.getIsActive(),
-                    machineData.getCableThreshold(),
-                    machineData.getTermAndSealThreshold(),
-                    machineData.getMinimumLength(),
-                    machineData.getMaximumLength(),
-                    machineData.getCanChangeCable(),
-                    machineData.getCanChangeTerminal(),
-                    machineData.getCanCutAndStrip(),
-                    getPrintColour(machineData.getPrintColour()),
                     user,
                     LocalDateTime.now(),
-                    null));
+                    null,
+                    "",
+                    new HashSet<>()));
         model.addAttribute("machine", new MachineFormData());
 //        return HtmxResponse.builder()
 //                .view("index :: machines")
@@ -145,14 +140,8 @@ public class MachineController {
                 machine.getDataPath(),
                 machine.getFeedbackPath(),
                 machine.getIsActive(),
-                machine.getCableThreshold(),
-                machine.getTermAndSealThreshold(),
-                machine.getMinimumLength(),
-                machine.getMaximumLength(),
-                machine.getCanChangeCable(),
-                machine.getCanChangeTerminal(),
-                machine.getCanCutAndStrip(),
-                machine.getPrintColour().toString()
+                machine.getUser(),
+                machine.getProperties()
                 );
     }
 
@@ -163,7 +152,6 @@ public class MachineController {
             case "BOTH" -> PrintColour.BOTH;
             case "NONE" -> PrintColour.NONE;
             default -> PrintColour.WHITE;
-
         };
     }
 }

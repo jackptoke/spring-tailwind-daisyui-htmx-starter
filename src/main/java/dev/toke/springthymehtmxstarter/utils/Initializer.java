@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Random;
 import java.util.stream.Stream;
 
@@ -138,17 +139,11 @@ public class Initializer {
                                 "\\\\valentine\\WPCS\\Kappa1\\WPCS_Data",
                                 "\\\\valentine\\WPCS\\Kappa1\\WPCS_Feedback",
                                         true,
-                                        40,
-                                        40,
-                                        200,
-                                        5000,
-                                        true,
-                                        true,
-                                        true,
-                                        PrintColour.WHITE,
                                         user1,
                                         LocalDateTime.now(),
-                                        null
+                                        null,
+                                        "",
+                                        new HashSet<>()
                                 ),
                         new Machine
                                 (null,
@@ -159,17 +154,11 @@ public class Initializer {
                                         "\\\\valentine\\WPCS\\Kappa2\\WPCS_Data",
                                         "\\\\valentine\\WPCS\\Kappa2\\WPCS_Feedback",
                                         true,
-                                        50,
-                                        50,
-                                        210,
-                                        5100,
-                                        false,
-                                        true,
-                                        true,
-                                        PrintColour.WHITE,
                                         user2,
                                         LocalDateTime.now(),
-                                        null
+                                        null,
+                                        "",
+                                        new HashSet<>()
                                 ),
                         new Machine
                                 (null,
@@ -180,17 +169,11 @@ public class Initializer {
                                         "\\\\valentine\\WPCS\\Kappa3\\WPCS_Data",
                                         "\\\\valentine\\WPCS\\Kappa3\\WPCS_Feedback",
                                         true,
-                                        60,
-                                        60,
-                                        220,
-                                        5200,
-                                        false,
-                                        true,
-                                        true,
-                                        PrintColour.BLACK,
                                         user1,
                                         LocalDateTime.now(),
-                                        null
+                                        null,
+                                        "",
+                                        new HashSet<>()
                                 ),
                         new Machine
                                 (null,
@@ -201,17 +184,11 @@ public class Initializer {
                                         "\\\\valentine\\WPCS\\Zeta1\\WPCS_Data",
                                         "\\\\valentine\\WPCS\\Zeta1\\WPCS_Feedback",
                                         true,
-                                        70,
-                                        70,
-                                        230,
-                                        5300,
-                                        true,
-                                        true,
-                                        true,
-                                        PrintColour.BOTH,
                                         user2,
                                         LocalDateTime.now(),
-                                        null
+                                        null,
+                                        "",
+                                        new HashSet<>()
                                 ),
                         new Machine
                                 (null,
@@ -222,17 +199,11 @@ public class Initializer {
                                         "\\\\valentine\\WPCS\\Zeta2\\WPCS_Data",
                                         "\\\\valentine\\WPCS\\Zeta2\\WPCS_Feedback",
                                         true,
-                                        80,
-                                        80,
-                                        280,
-                                        20800,
-                                        true,
-                                        true,
-                                        true,
-                                        PrintColour.BOTH,
                                         user1,
                                         LocalDateTime.now(),
-                                        null
+                                        null,
+                                        "",
+                                        new HashSet<>()
                                 ))
                 .forEach( machineRepo::save );
     }
