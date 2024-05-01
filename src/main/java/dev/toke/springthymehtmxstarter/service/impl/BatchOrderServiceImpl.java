@@ -24,6 +24,11 @@ public class BatchOrderServiceImpl implements BatchOrderService {
     }
 
     @Override
+    public List<BatchOrder> getUnplannedAndPlanIdBatchOrders(String date) {
+        return List.of();
+    }
+
+    @Override
     public BatchOrder createBatchOrder(BatchOrder batchOrder) {
         if(batchOrder.getId() != null && batchOrderRepo.existsById(batchOrder.getId())) {
             throw new RuntimeException("Batch order already exists");

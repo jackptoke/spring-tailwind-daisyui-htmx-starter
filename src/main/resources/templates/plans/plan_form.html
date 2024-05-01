@@ -1,6 +1,78 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html th:lang="|${#locale.language}-${#locale.country}|"
+      xmlns:th="http://www.thymeleaf.org"
+>
 <body>
-    <div>Plan Form</div>
+    <div th:fragment="plan-form" id="plan-form" class="plan-form flex justify-center">
+        <form method="dialog" th:object="${plan}"
+              th:hx-post="@{/plans}"
+        >
+            <div class="grid grid-cols-6 gap-3 mt-10">
+                <div class="col-span-6" >New Plan</div>
+
+                <input id="plan-description" type="text" name="plan-description"
+                       class="input input-bordered col-span-3"
+                       placeholder="Description"
+                       th:field="*{description}"
+                />
+
+                <div class="flatpickr relative h-10 min-w-[200px]">
+                    <input
+                            id="start-date-picker"
+                            class="peer date-picker input input-bordered input-sm items-center"
+                            placeholder=" "
+                    />
+                    <label class="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none !overflow-visible truncate text-[11px] font-normal leading-tight text-gray-500 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-200 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:!border-gray-900 peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:!border-gray-900 peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
+                        Start Date
+                    </label>
+                </div>
+
+                <div class="flatpickr relative h-10 min-w-[200px]">
+                    <input
+                            id="run-date-picker"
+                            class="date-picker peer input input-bordered input-sm items-center"
+                            placeholder=" "
+                    />
+                    <label class="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none !overflow-visible truncate text-[11px] font-normal leading-tight text-gray-500 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-200 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:!border-gray-900 peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:!border-gray-900 peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
+                        Run Date
+                    </label>
+                </div>
+                <label class="priority">
+                    <select class="select select-bordered max-w-xs  col-span-2">
+                        <option th:each="priority : ${priorities}" th:text="${priority}" th:value="${priority}"></option>
+                    </select>
+                    <div class="label">
+                        <span class="label-text-alt">Priority</span>
+                    </div>
+                </label>
+                <div id="batch-orders-list" class="batch-orders-list col-span-6">
+                    <table >
+
+                    </table>
+                </div>
+
+                <div class="w-full col-span-2"> </div>
+                <div class="mx-auto w-full col-span-2">
+                    <button class="btn btn-outline"
+                            type="submit"
+                    >Save</button>
+
+                    <button id="cancel-button"
+                            class="btn btn-outline btn-secondary"
+                            hx-target="#plan-form"
+                    >Cancel</button>
+                </div>
+                <div class="w-full col-span-2"> </div>
+
+            </div>
+        </form>
+        <script>
+            const datepicker = flatpickr(".date-picker", {
+                allowInput: true,
+                dateFormat: "d-m-Y"
+            });
+
+        </script>
+    </div>
 </body>
 </html>

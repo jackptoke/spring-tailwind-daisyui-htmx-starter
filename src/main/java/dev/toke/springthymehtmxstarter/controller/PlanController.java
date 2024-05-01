@@ -1,7 +1,9 @@
 package dev.toke.springthymehtmxstarter.controller;
 
+import dev.toke.springthymehtmxstarter.data.dto.BatchOrderData;
 import dev.toke.springthymehtmxstarter.data.dto.PlanFormData;
 import dev.toke.springthymehtmxstarter.data.model.PlanPriority;
+import dev.toke.springthymehtmxstarter.service.BatchOrderService;
 import dev.toke.springthymehtmxstarter.service.WorkPlanService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.time.LocalDate;
-import java.time.temporal.TemporalAdjuster;
 import java.time.temporal.TemporalAdjusters;
 
 @Controller
@@ -22,6 +23,8 @@ import java.time.temporal.TemporalAdjusters;
 @Slf4j
 public class PlanController {
     private final WorkPlanService workPlanService;
+    private final BatchOrderService batchOrderService;
+
     @GetMapping
     public String index(Model model) {
         model.addAttribute("plans", workPlanService.getWorkPlans());
@@ -43,7 +46,10 @@ public class PlanController {
                                             .getDayOfMonth());
         model.addAttribute("priorities", PlanPriority.values());
 
-        return "plans/new_plan";
+        var unplannedBatches = batchOrderService.getUnplannedBatchOrders().stream().map(BatchOrderData::from);
+        model.addAttribute("unplannedBatches", unplannedBatches);
+
+        return "plans/plan_form :: plan-form";
     }
 
     @GetMapping("/day/{day}/month/{month}/year/{year}")
