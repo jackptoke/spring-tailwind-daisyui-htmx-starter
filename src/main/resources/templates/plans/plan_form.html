@@ -3,9 +3,8 @@
       xmlns:th="http://www.thymeleaf.org"
 >
 <body>
-    <div th:fragment="plan-form" id="plan-form" class="plan-form flex justify-center">
-        <form method="dialog" th:object="${plan}"
-              th:hx-post="@{/plans}"
+    <div th:fragment="plan-form" id="plan-form" class="container mx-auto mt-4 min-h-dvh w-full z-0 flex flex-col border-x-green-300">
+        <form method="dialog" th:action="@{/plans}" th:object="${plan}" class="flex flex-col w-full"
         >
             <div class="grid grid-cols-6 gap-3 mt-10">
                 <div class="col-span-6" >New Plan</div>
@@ -45,27 +44,69 @@
                         <span class="label-text-alt">Priority</span>
                     </div>
                 </label>
-                <div id="batch-orders-list" class="batch-orders-list col-span-6">
-                    <table >
-
-                    </table>
-                </div>
-
-                <div class="w-full col-span-2"> </div>
-                <div class="mx-auto w-full col-span-2">
-                    <button class="btn btn-outline"
-                            type="submit"
-                    >Save</button>
-
-                    <button id="cancel-button"
-                            class="btn btn-outline btn-secondary"
-                            hx-target="#plan-form"
-                    >Cancel</button>
-                </div>
-                <div class="w-full col-span-2"> </div>
-
             </div>
+            <div class="flex flex-row w-full justify-end">
+                <button class="btn btn-primary rounded-full">Save Plan</button>
+                <button class="btn btn-warning rounded-full">Cancel</button>
+            </div>
+            <div class="border-2 w-full justify-between">
+                <div id="batch-orders-list" class="batch-orders-list flex flex-row w-full">
+                    <form class="flex-auto w-32">
+                        <table class="">
+                            <tr>
+                                <th><input type="checkbox" th:checked="checked" class="checkbox" /></th>
+                                <th>Order #</th>
+                                <th>Harness</th>
+                                <th>Revision</th>
+                                <th>Quantity</th>
+                                <th># Cicuits</th>
+                                <th># Terminals</th>
+                                <th></th>
+                            </tr>
+                            <tr th:each="batch : ${unplannedBatches}" x-data="{ selected: false }">
+                                <td ><input type="checkbox"
+                                            th:id="${batch.getId()}"
+                                            th:checked="${batch.getSelected()}"
+                                            class="checkbox"
+                                            @change="selected = !selected"
+                                /></td>
+                                <td th:text="${batch.getId()}"></td>
+                                <td th:text="${batch.getHarness()}"></td>
+                                <td th:text="${batch.getRevision()}"></td>
+                                <td th:text="${batch.getQuantity()}"></td>
+                                <td th:text="${batch.getCircuitCount()}"></td>
+                                <td th:text="${batch.getTerminationCount()}"></td>
+                                <td x-text="selected"></td>
+                            </tr>
+                        </table>
+                    </form>
+
+                    <div class="flex-auto w-10">
+                        <div class="flex flex-col">
+                            <button class="btn btn-succes">Add</button>
+                            <button class="btn btn-warning">Remove</button>
+                        </div>
+                    </div>
+                    <form class="flex-auto w-32">
+                        <table class="">
+                            <tr>
+                                <th><input type="checkbox" th:checked="checked" class="checkbox" /></th>
+                                <th>Order #</th>
+                                <th>Harness</th>
+                                <th>Revision</th>
+                                <th>Quantity</th>
+                                <th># Cicuits</th>
+                                <th># Terminals</th>
+                                <th></th>
+                            </tr>
+
+                        </table>
+                    </form>
+                </div>
+            </div>
+
         </form>
+
         <script>
             const datepicker = flatpickr(".date-picker", {
                 allowInput: true,
