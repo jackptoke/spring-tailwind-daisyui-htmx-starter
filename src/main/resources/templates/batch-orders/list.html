@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div id="order-list" class="container mx-auto mt-4 min-h-dvh w-full z-0 flex flex-col">
+
+    <div class="flex justify-between">
+        <div class="grow"></div>
+        <div class="grow-0">
+            <button type="button" class="rounded-full bg-indigo-600 p-2 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    th:hx-get="@{/batch-orders/new}"
+                    hx-target="#batch_order_page_content">
+                <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <div class="overflow-x-auto w-full" >
+        <table class="table-auto w-full">
+            <caption class="caption-top">
+                Batch Orders
+            </caption>
+            <thead>
+            <tr>
+
+                <th>id</th>
+                <th>Customer</th>
+                <th>Harness</th>
+                <th>Revision</th>
+                <th>Release Due</th>
+                <th>Released Date</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr id="order-detail" class="order-detail" th:each="order : ${batchOrders}">
+                <th th:text="${order.getId()}">1</th>
+                <td th:text="${order.getCustomer()}">Cy Ganderton</td>
+                <td th:text="${order.getHarness()}">Quality Control Specialist</td>
+                <td th:text="${order.getRevision()}">Blue</td>
+                <td th:text="${order.getReleaseDueDate()}"></td>
+                <td th:text="${order.getReleasedDate()}"></td>
+                <td class="buttons flex flex-row gap-5">
+                    <button type="button"
+                            class="rounded-md bg-green-400 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-green-700"
+                            th:hx-get="@{/batch-orders/{id}(id=${order.getId()})}"
+                            hx-target="#machine_page_content"
+                    >
+                        Edit
+                    </button>
+                    <button type="button" class="rounded-md bg-red-500 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-red-600 focus-visible:outline-red-600"
+                            th:attr="hx-delete=@{/batch-orders/{id}(id=${order.id})}"
+                            hx-swap="outerHTML"
+                            hx-target="closest #order-detail">DELETE</button>
+
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

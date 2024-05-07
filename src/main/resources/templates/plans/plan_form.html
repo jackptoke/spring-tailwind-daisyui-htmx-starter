@@ -3,56 +3,50 @@
       xmlns:th="http://www.thymeleaf.org"
 >
 <body>
-    <div th:fragment="plan-form" id="plan-form" class="container mx-auto mt-4 min-h-dvh w-full z-0 flex flex-col border-x-green-300">
-        <form method="dialog" th:action="@{/plans}" th:object="${plan}" class="flex flex-col w-full"
+    <div th:fragment="plan-form" id="plan-form" class="container mx-auto flex min-h-dvh flex-col">
+        <form method="dialog" th:action="@{/plans}" th:object="${plan}"
         >
             <div class="grid grid-cols-6 gap-3 mt-10">
-                <div class="col-span-6" >New Plan</div>
+                <div class="col-span-6" ><p class="text-2xl text-blue-800 font-bold">New Plan</p></div>
 
-                <input id="plan-description" type="text" name="plan-description"
-                       class="input input-bordered col-span-3"
-                       placeholder="Description"
-                       th:field="*{description}"
-                />
-
-                <div class="flatpickr relative h-10 min-w-[200px]">
-                    <input
-                            id="start-date-picker"
-                            class="peer date-picker input input-bordered input-sm items-center"
-                            placeholder=" "
+                <div class="text-start col-span-3">
+                    <lable class="text-lg font-semibold">Description</lable> <br>
+                    <input id="plan-description" type="text" name="plan-description"
+                           class="input iborder-2 border-gray-300 rounded px-3 py-2 w-full"
+                           placeholder="Description"
+                           th:field="*{description}"
                     />
-                    <label class="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none !overflow-visible truncate text-[11px] font-normal leading-tight text-gray-500 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-200 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:!border-gray-900 peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:!border-gray-900 peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
-                        Start Date
-                    </label>
                 </div>
 
-                <div class="flatpickr relative h-10 min-w-[200px]">
-                    <input
-                            id="run-date-picker"
-                            class="date-picker peer input input-bordered input-sm items-center"
-                            placeholder=" "
-                    />
-                    <label class="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none !overflow-visible truncate text-[11px] font-normal leading-tight text-gray-500 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-200 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:!border-gray-900 peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:!border-gray-900 peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
-                        Run Date
-                    </label>
+
+                <div class="text-start  col-span-1">
+                    <lable class="text-lg font-semibold">Choose Date</lable> <br>
+                    <input id="datepicker-start" class="datepicker border-2 border-gray-300 rounded px-3 py-2 w-56" type="date"
+                           placeholder="Select a date">
                 </div>
-                <label class="priority">
-                    <select class="select select-bordered max-w-xs  col-span-2">
+
+                <div class="text-start  col-span-1 w-full">
+                    <lable class="text-lg font-semibold">Choose Date</lable> <br>
+                    <input id="datepicker-run" class="datepicker border-2 border-gray-300 rounded px-3 py-2 w-56" type="date"
+                           placeholder="Select a date">
+                </div>
+                <div class="text-start  w-full col-span-1">
+                    <lable class="text-lg font-semibold">Choose Date</lable> <br>
+                    <select class="select border-2 border-gray-300 rounded px-3 py-2 w-56  col-span-2">
                         <option th:each="priority : ${priorities}" th:text="${priority}" th:value="${priority}"></option>
                     </select>
-                    <div class="label">
-                        <span class="label-text-alt">Priority</span>
-                    </div>
-                </label>
+                </div>
             </div>
-            <div class="flex flex-row w-full justify-end">
-                <button class="btn btn-primary rounded-full">Save Plan</button>
-                <button class="btn btn-warning rounded-full">Cancel</button>
+
+            <div class="flex flex-row w-full mt-5 gap-5">
+                <button class="rounded-md bg-indigo-500 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">Save Plan</button>
+                <button class="rounded-md bg-indigo-500 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">Cancel</button>
             </div>
-            <div class="border-2 w-full justify-between">
-                <div id="batch-orders-list" class="batch-orders-list flex flex-row w-full">
-                    <form class="flex-auto w-32">
-                        <table class="">
+
+            <div id="batch-orders-list" class="batch-orders-list mx-auto flex w-full items-start gap-x-8 px-4 py-10 sm:px-6 lg:px-8">
+                <main class="flex-1">
+                    <form>
+                        <table class="w-full">
                             <tr>
                                 <th><input type="checkbox" th:checked="checked" class="checkbox" /></th>
                                 <th>Order #</th>
@@ -80,15 +74,17 @@
                             </tr>
                         </table>
                     </form>
+                </main>
 
-                    <div class="flex-auto w-10">
-                        <div class="flex flex-col">
-                            <button class="btn btn-succes">Add</button>
-                            <button class="btn btn-warning">Remove</button>
-                        </div>
+                <aside class="top-8 w-24 lg:block">
+                    <div class="flex flex-col space-y-5">
+                        <button class="rounded bg-indigo-500 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">&gt;&gt;</button>
+                        <button class="rounded bg-indigo-500 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">&lt;&lt;</button>
                     </div>
-                    <form class="flex-auto w-32">
-                        <table class="">
+                </aside>
+                <aside class="flex-1">
+                    <form class="w-full">
+                        <table class="w-full">
                             <tr>
                                 <th><input type="checkbox" th:checked="checked" class="checkbox" /></th>
                                 <th>Order #</th>
@@ -102,18 +98,12 @@
 
                         </table>
                     </form>
-                </div>
+                </aside>
+
             </div>
 
         </form>
 
-        <script>
-            const datepicker = flatpickr(".date-picker", {
-                allowInput: true,
-                dateFormat: "d-m-Y"
-            });
-
-        </script>
     </div>
 </body>
 </html>

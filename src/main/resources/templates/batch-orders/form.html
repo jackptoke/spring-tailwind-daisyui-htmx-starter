@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<form>
+    <div class="space-y-12">
+        <div class="border-b border-gray-900/10 pb-12">
+            <h2 class="text-base font-semibold leading-7 text-gray-900">New Batch Order</h2>
+            <p class="mt-1 text-sm leading-6 text-gray-600">This information are crucial to the business so be careful
+                to enter the data as accurately as possibly can</p>
+
+            <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                <div class="col-span-2">
+                    <div>
+                        <label for="customer" class="block text-sm font-medium leading-6 text-gray-900">Customer</label>
+                        <select id="customer" name="customer" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            <option selected>Kenworth</option>
+                            <option>Ameint</option>
+                            <option>Thales</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-span-2">
+                    <label for="harness" class="block text-sm font-medium leading-6 text-gray-900">Due in store</label>
+                    <div class="mt-2">
+                        <input type="date" name="due-in-store" id="due-in-store" autocomplete="harness"
+                               class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                    </div>
+                </div>
+                <div class="col-span-2">
+                    <label for="harness" class="block text-sm font-medium leading-6 text-gray-900">Release by</label>
+                    <div class="mt-2">
+                        <input type="date" name="release-due" id="release-due" autocomplete="harness"
+                               class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                    </div>
+                </div>
+                <div class="sm:col-span-2 sm:col-start-1">
+                    <label for="harness" class="block text-sm font-medium leading-6 text-gray-900">Harness</label>
+                    <div class="mt-2">
+                        <input type="text" name="harness" id="harness" autocomplete="harness"
+                               class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                    </div>
+                </div>
+
+                <div class="sm:col-span-2">
+                    <div>
+                        <label for="revision" class="block text-sm font-medium leading-6 text-gray-900">Revision</label>
+                        <select id="revision" name="revision" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            <option>A</option>
+                            <option selected>B</option>
+                            <option>C</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="sm:col-span-2">
+                    <label for="quantity" class="block text-sm font-medium leading-6 text-gray-900">Quantity</label>
+                    <div class="mt-2">
+                        <input type="number" min="1" max="9999" name="quantity" id="quantity" autocomplete="quantity" value="1"
+                               class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                    </div>
+                </div>
+                <div class="sm:col-span-2">
+                    <div>
+                        <label for="worksite" class="block text-sm font-medium leading-6 text-gray-900">Work Site</label>
+                        <select id="worksite" name="worksite" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            <option selected>ARARAT</option>
+                            <option>MELBOURNE</option>
+                            <option>MALAYSIA</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="sm:col-span-2">
+                    <div>
+                        <label for="delivery-site" class="block text-sm font-medium leading-6 text-gray-900">Delivery Site</label>
+                        <select id="delivery-site" name="delivery-site" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            <option selected>ARARAT</option>
+                            <option>MELBOURNE</option>
+                            <option>MALAYSIA</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="sm:col-span-2">
+                    <div>
+                        <label for="delivery-location" class="block text-sm font-medium leading-6 text-gray-900">Delivery Location</label>
+                        <select id="delivery-location" name="delivery-location" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            <option selected>CUTTING</option>
+                            <option>PRE ASSEMBLY</option>
+                            <option>BATTERY</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="sm:col-span-2">
+                    <div>
+                        <label for="release-location" class="block text-sm font-medium leading-6 text-gray-900">Release Location</label>
+                        <select id="release-location" name="delivery-location" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            <option selected>CUTTING</option>
+                            <option>PRE ASSEMBLY</option>
+                            <option>BATTERY</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="sm:col-span-2">
+                    <div>
+                        <label for="special-code" class="block text-sm font-medium leading-6 text-gray-900">Special Code</label>
+                        <select id="special-code" name="special-code" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            <option selected>Standard</option>
+                            <option>Rebuild</option>
+                            <option>KW Kanban</option>
+                            <option>Component</option>
+                            <option>Injection</option>
+                            <option>Under Lead Time</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="sm:col-span-2 py-2">
+                    <div class="flex flex-row mt-2">
+                        <div class="flex h-6 w-6 items-center">
+                            <input id="sir-required" aria-describedby="sir-description" name="sir-required" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                        </div>
+                        <div class="ml-3 text-sm leading-6 mx-5">
+                            <label for="sir-required" class="font-medium text-gray-900">FAI Required</label>
+                            <p id="sir-description" class="text-gray-500">Quality assurance - First Article Inspection.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="sm:col-span-2 py-2">
+                    <div class="flex flex-row mt-2">
+                        <div class="flex h-6 w-6 items-center">
+                            <input id="create-children" aria-describedby="create-children-description" name="sir-required" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" checked>
+                        </div>
+                        <div class="ml-3 text-sm leading-6 mx-5">
+                            <label for="create-children" class="font-medium text-gray-900">Create Children</label>
+                            <p id="create-children-description" class="text-gray-500">Is it required for the children/sub-harnesses to be created?</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mt-6 flex items-center justify-end gap-x-6">
+            <button type="button" class="text-sm font-semibold leading-6 text-gray-900" th:hx-get="@{/batch-orders/home}"
+                    hx-target="#batch_order_page_content">Cancel</button>
+            <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" th:hx-get="@{/batch-orders/home}"
+                    hx-target="#batch_order_page_content">Save</button>
+        </div>
+    </div>
+
+</form>
+</body>
+</html>
