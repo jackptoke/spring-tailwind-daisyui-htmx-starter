@@ -5,58 +5,8 @@
       layout:decorate="~{layout/main}"
 >
 <body>
-<section layout:fragment="content" class="container w-5/6 h-screen mx-auto mb-auto">
-    <div class="space-y-12">
-        <div class="py-12">
-            <div class="navbar bg-base-100">
-                <div class="flex-1">
-                    <a class="btn btn-ghost text-xl">Users</a>
-                </div>
-                <div class="flex-none">
-                    <button class="btn btn-ghost" onclick="my_modal_3.showModal()">
-                        New User
-                    </button>
-                </div>
-            </div>
-            <div class="overflow-x-auto">
-                <table th:fragment="users" id="users" class="table table-zebra">
-                    <!-- head -->
-                    <thead>
-                    <tr>
-                        <th></th>
-                        <th>Username</th>
-                        <th>Email</th>
-                        <th>Is Active</th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <!-- row 1 -->
-                    <tr id="user-detail" class="user-detail"
-                        th:each="user : ${ users }">
-                        <th th:text="${user.id()}">1</th>
-                        <td th:text="${user.username()}">Cy Ganderton</td>
-                        <td th:text="${user.email()}">Quality Control Specialist</td>
-                        <td>
-                            <input type="checkbox" class="toggle toggle-success" th:checked="${ user.isActive() }" />
-                        </td>
-                        <td>
-                            <button
-                                    class="btn btn-outline btn-error btn-sm"
-                                    hx-swap="outerHTML"
-                                    th:hx-delete="@{/users/{username}(username=${user.username()})}"
-                                    hx-target="closest #users"
-                            >
-                                Delete
-                            </button>
-                        </td>
-                    </tr>
-
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+<section layout:fragment="content" id="users_page_content" class="container w-5/6 h-screen mx-auto mb-auto">
+    <div th:replace="users/list"></div>
 </section>
 </body>
 </html>

@@ -1,11 +1,16 @@
 package dev.toke.springthymehtmxstarter.data.model;
 
 public enum UnitOfMaesurement {
-    BARREL,
-    EACH,
-    GALLON,
-    INCH,
-    KG,
-    MM,
-    LITRE,
+    Each("EA"),
+    Gallon("GA"),
+    Inch("IN"),
+    Kilogram("KG"),
+    Millimeter("MM"),
+    Meter("MT"),
+    Litre("LT");
+
+    public final String name;
+    UnitOfMaesurement(String name) {
+        this.name = name;
+    }
 }

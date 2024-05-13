@@ -16,6 +16,8 @@ import java.time.LocalDateTime;
 public class BaseComponent {
     @Id
     private Long id;
+    private String partNumber;
+    private String customerPartNumber;
     private String name;
     private String description;
     @ManyToOne(fetch = FetchType.LAZY)
@@ -26,4 +28,5 @@ public class BaseComponent {
     @JoinColumn(name = "updatedByUser")
     private User updatedBy;
     private LocalDateTime updatedAt;
+    private UnitOfMaesurement uom;
 }

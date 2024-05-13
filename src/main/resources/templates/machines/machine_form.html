@@ -31,21 +31,21 @@
                            th:field="*{machineBrand}"
                     />
 
-                    <label>Brand</label>
+                    <label>Model</label>
                     <input id="machine-model" type="text" name="machine-model"
                            class="input input-bordered w-full max-w-xs col-span-2"
                            placeholder="Model"
                            th:field="*{machineModel}"
                     />
 
-                    <label>Brand</label>
+                    <label>WPCS Data Path</label>
                     <input id="machine-data-path" type="text" name="machine-data-path"
                            class="input input-bordered w-full max-w-xs col-span-2"
                            placeholder="WPCS Data path"
                            th:field="*{dataPath}"
                     />
 
-                    <label>Brand</label>
+                    <label>WPCS Feedback Path</label>
                     <input id="machine-feedback-path" type="text" name="machine-feedback-path"
                            class="input input-bordered w-full max-w-xs col-span-2"
                            placeholder="WPCS feedback path"
@@ -62,13 +62,13 @@
                     <div></div>
                     <div class="w-full"> </div>
                     <div class="mx-auto w-full ">
-                        <button class="btn btn-outline"
+                        <button class="rounded-md bg-green-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-green-700"
                                 type="submit"
                         >Save</button>
 
                         <button id="cancel-button"
-                                class="btn btn-outline btn-secondary"
-                                th:hx-get="@{/machines/redirect}"
+                                class="rounded-md bg-red-500 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-red-600 focus-visible:outline-red-600"
+                                th:hx-get="@{/machines/home}"
                                 hx-target="#machine_page_content"
                         >Cancel</button>
                     </div>

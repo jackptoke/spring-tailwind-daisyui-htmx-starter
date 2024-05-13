@@ -2,6 +2,7 @@ package dev.toke.springthymehtmxstarter.controller;
 
 import dev.toke.springthymehtmxstarter.data.dto.UserDto;
 import dev.toke.springthymehtmxstarter.data.model.User;
+import dev.toke.springthymehtmxstarter.service.RoleService;
 import dev.toke.springthymehtmxstarter.service.UserService;
 import io.github.wimdeblauwe.htmx.spring.boot.mvc.HtmxResponse;
 import jakarta.validation.Valid;
@@ -19,12 +20,26 @@ import java.util.List;
 @Slf4j
 public class UserController {
     private final UserService userService;
+    private final RoleService roleService;
 
     @GetMapping
     public String index(Model model) {
         model.addAttribute("user", new User());
         addAttributesForIndex(model, ListFilter.ALL);
         return "users/index";
+    }
+
+    @GetMapping("/new")
+    public String newUser(Model model) {
+        model.addAttribute("user", new User());
+        model.addAttribute("roles", roleService.getUserRoles());
+        return "users/form";
+    }
+
+    @GetMapping("/home")
+    public String home(Model model) {
+        addAttributesForIndex(model, ListFilter.ALL);
+        return "users/list";
     }
 
     @GetMapping("/active")

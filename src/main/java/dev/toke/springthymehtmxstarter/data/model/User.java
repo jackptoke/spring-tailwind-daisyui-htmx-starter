@@ -7,6 +7,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name = "AmeUser")
 @NoArgsConstructor
@@ -26,4 +30,6 @@ public class User {
     @NotBlank
     private String password;
     private Boolean isActive;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private Set<UsersRoles> roles = new HashSet<>();
 }

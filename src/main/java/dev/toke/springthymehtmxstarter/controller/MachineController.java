@@ -43,19 +43,12 @@ public class MachineController {
         return "machines/index";
     }
 
-    @GetMapping("/redirect")
-    public HtmxResponse redirect(Model model, RedirectAttributes redirectAttributes,
+    @GetMapping("/home")
+    public String redirect(Model model, RedirectAttributes redirectAttributes,
                                  HtmxRequest htmxRequest) {
         log.info("Redirecting ...");
-        if("cancel-button".equals(htmxRequest.getTriggerId())){
-            log.info("Redirecting cancel button");
-            redirectAttributes.addFlashAttribute("successMessage", "Deleted Machine!");
-            model.addAttribute("machines", machineService.getMachines());
-            return HtmxResponse.builder()
-                    .view("machines/machines_list :: machines_list")
-                    .build();
-        }
-        return HtmxResponse.builder().build();
+        model.addAttribute("machines", machineService.getMachines());
+        return "machines/machines_list";
     }
 
     @GetMapping("/new")

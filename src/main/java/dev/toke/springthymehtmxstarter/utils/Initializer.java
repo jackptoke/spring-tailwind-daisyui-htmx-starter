@@ -5,8 +5,11 @@ import dev.toke.springthymehtmxstarter.events.ResetMachineDataEvent;
 import dev.toke.springthymehtmxstarter.repository.CableTypeRepo;
 import dev.toke.springthymehtmxstarter.repository.MachineRepo;
 import dev.toke.springthymehtmxstarter.repository.ProductionStatusRepo;
+import dev.toke.springthymehtmxstarter.repository.UsersRolesRepo;
 import dev.toke.springthymehtmxstarter.service.BatchOrderService;
+import dev.toke.springthymehtmxstarter.service.RoleService;
 import dev.toke.springthymehtmxstarter.service.UserService;
+import dev.toke.springthymehtmxstarter.service.UsersRolesService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
@@ -14,6 +17,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.stream.Stream;
@@ -26,8 +30,10 @@ public class Initializer {
     private final CableTypeRepo cableTypeRepo;
     private final ProductionStatusRepo productionStatusRepo;
     private final Random random = new Random();
+    private final RoleService roleService;
 
     private final BatchOrderService batchOrderService;
+    private final UsersRolesService usersRolesService;
 
     @EventListener({ ApplicationReadyEvent.class, ResetMachineDataEvent.class})
     void reset() {
@@ -120,15 +126,28 @@ public class Initializer {
             }
         }
 
-        Stream.of(new User(null, "jackptoke", "jackptoke@gmail.com", "password", true),
-                new User(null, "amytoke", "amytoke@gmail.com", "password", true),
-                new User(null, "josiahtoke", "josiahtoke@gmail.com", "password", false),
-                new User(null, "jeremiahtoke", "jeremiahtoke@gmail.com", "password", false),
-                new User(null, "adrielletoke", "adrielletoke@gmail.com", "password", false),
-                new User(null, "israeltoke", "israeltoke@gmail.com", "password", false))
+        Stream.of(
+                new Role("Planning Supervisor", "This user has the highest privilege within the Planning department"),
+                new Role("Planning User", "This is a regular user in the Planning department"),
+                new Role("Dispatch Supervisor", "This is the user with the highest privilege within Dispatch"),
+                new Role("Dispatch User", "This is the regular user in the Dispatch department")
+                ).forEach(roleService::addRole);
+
+        Stream.of(new User(null, "jackptoke", "jackptoke@gmail.com", "password", true, Collections.emptySet()),
+                new User(null, "amytoke", "amytoke@gmail.com", "password", true, Collections.emptySet()),
+                new User(null, "josiahtoke", "josiahtoke@gmail.com", "password", false, Collections.emptySet()),
+                new User(null, "jeremiahtoke", "jeremiahtoke@gmail.com", "password", false, Collections.emptySet()),
+                new User(null, "adrielletoke", "adrielletoke@gmail.com", "password", false, Collections.emptySet()),
+                new User(null, "israeltoke", "israeltoke@gmail.com", "password", false, Collections.emptySet()))
                 .forEach(userService::save);
+
+
         User user1 = userService.findByUsername("jackptoke");
         User user2 = userService.findByUsername("amytoke");
+        Role role = roleService.getUserRoles().get(0);
+
+        usersRolesService.addUserRole(new UsersRoles(null, user1, role));
+
         Stream.of(
                 new Machine
                                 (null,

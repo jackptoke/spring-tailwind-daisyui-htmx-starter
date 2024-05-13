@@ -10,7 +10,8 @@ import lombok.Setter;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity(name = "Harness")
+@Entity
+@Table(name = "Harness")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter

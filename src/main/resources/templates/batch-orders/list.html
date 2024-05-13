@@ -19,18 +19,18 @@
     <div class="overflow-x-auto w-full" >
         <table class="table-auto w-full">
             <caption class="caption-top">
-                Batch Orders
+                <h1 class="text-2xl font-bold">Batch Orders</h1>
             </caption>
             <thead>
             <tr>
 
                 <th>id</th>
-                <th>Customer</th>
-                <th>Harness</th>
-                <th>Revision</th>
-                <th>Release Due</th>
-                <th>Released Date</th>
-                <th></th>
+                <th class="text-start">Customer</th>
+                <th class="text-start">Harness</th>
+                <th class="text-start">Revision</th>
+                <th class="text-start">Release Due</th>
+                <th class="text-start">Released Date</th>
+                <th class="text-center"></th>
             </tr>
             </thead>
             <tbody>
@@ -43,7 +43,7 @@
                 <td th:text="${order.getReleasedDate()}"></td>
                 <td class="buttons flex flex-row gap-5">
                     <button type="button"
-                            class="rounded-md bg-green-400 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-green-700"
+                            class="rounded-md bg-green-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-green-700"
                             th:hx-get="@{/batch-orders/{id}(id=${order.getId()})}"
                             hx-target="#machine_page_content"
                     >

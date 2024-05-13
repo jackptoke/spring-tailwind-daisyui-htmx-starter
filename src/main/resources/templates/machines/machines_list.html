@@ -1,29 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <body>
-    <div th:fragment="machines_list">
+    <div id="machine-list" class="container mx-auto mt-4 min-h-dvh w-full z-0 flex flex-col">
         <div class="flex justify-between">
-            <h1 id="text-xl font-black grow-0">Machines</h1>
             <div class="grow"></div>
             <div class="grow-0">
-                <button class="btn btn-primary"
+                <button class="rounded-full bg-indigo-600 p-2 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                         th:hx-get="@{/machines/new}"
                         hx-target="#machine_page_content"
                 >
-                    New Machine
+                    <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
+                    </svg>
                 </button>
             </div>
         </div>
 
-        <div class="overflow-x-auto" >
-            <table id="machines" class="table table-zebra">
+        <div class="overflow-x-auto w-full" >
+            <table id="machines" class="table table-auto w-full">
+                <caption class="caption-top">
+                    Machines
+                </caption>
                 <thead>
                 <tr>
                     <th></th>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Brand</th>
-                    <th>Model</th>
+                    <th class="text-start">Name</th>
+                    <th class="text-start">Description</th>
+                    <th class="text-start">Brand</th>
+                    <th class="text-start">Model</th>
                     <th>Is Active</th>
                 </tr>
                 </thead>
@@ -34,19 +38,19 @@
                     <td th:text="${machine.getDescription()}"></td>
                     <td th:text="${machine.getBrand()}"></td>
                     <td th:text="${machine.getModel()}"></td>
-                    <td>
+                    <td  class="text-center">
                         <input type="checkbox" class="toggle toggle-success" th:checked="${ machine.getIsActive() }" />
                     </td>
-                    <td class="buttons">
+                    <td class="flex flex-row gap-5">
                         <div
-                                class="btn btn-outline btn-primary btn-sm"
+                                class="rounded-md bg-green-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-green-700"
                                 th:hx-get="@{/machines/{id}(id=${machine.getId()})}"
                                 hx-target="#machine_page_content"
                         >
                             Edit
                         </div>
                         <button id="delete-button"
-                                class="btn btn-outline btn-error btn-sm"
+                                class="rounded-md bg-red-500 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-red-600 focus-visible:outline-red-600"
                                 th:hx-delete="@{/machines/{id}(id=${machine.id})}"
                                 hx-target="#machine_page_content"
                         >
