@@ -6,10 +6,7 @@ import dev.toke.springthymehtmxstarter.repository.CableTypeRepo;
 import dev.toke.springthymehtmxstarter.repository.MachineRepo;
 import dev.toke.springthymehtmxstarter.repository.ProductionStatusRepo;
 import dev.toke.springthymehtmxstarter.repository.UsersRolesRepo;
-import dev.toke.springthymehtmxstarter.service.BatchOrderService;
-import dev.toke.springthymehtmxstarter.service.RoleService;
-import dev.toke.springthymehtmxstarter.service.UserService;
-import dev.toke.springthymehtmxstarter.service.UsersRolesService;
+import dev.toke.springthymehtmxstarter.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
@@ -34,12 +31,13 @@ public class Initializer {
 
     private final BatchOrderService batchOrderService;
     private final UsersRolesService usersRolesService;
+    private final MaterialComponentService materialComponentService;
 
     @EventListener({ ApplicationReadyEvent.class, ResetMachineDataEvent.class})
     void reset() {
         machineRepo.deleteAll();
         userService.deleteAll();
-        if(!cableTypeRepo.findAll().isEmpty()) {
+        if(cableTypeRepo.findAll().isEmpty()) {
             Stream.of(
                     new CableType(null, "UNKNOWN TYPE"),
                     new CableType(null, "AVS"),
@@ -225,6 +223,17 @@ public class Initializer {
                                         new HashSet<>()
                                 ))
                 .forEach( machineRepo::save );
+
+        Stream.of(new MaterialComponent(
+                "1BGE7800K014", "1BGE7800K014", "1BGE7800K014",
+                "Some Kenworth part", user1, user1, UnitOfMeasurement.Each,
+                0.250, UnitOfMeasurement.Kilogram, ComponentGroup.COMPONENT
+                ),
+                new MaterialComponent(
+                        "A92-1422-103", "A92-1422-103", "A92-1422-103",
+                        "Some Kenworth part", user1, user1, UnitOfMeasurement.Each,
+                        1.55, UnitOfMeasurement.Kilogram, ComponentGroup.HARNESS
+                )).forEach(materialComponentService::addComponent);
     }
 
     private String getRandomString(int length, boolean alphaOnly) {

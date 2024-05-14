@@ -12,13 +12,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "AmeUser")
+@Table(name = "AmeUsers")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter @Setter
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(unique = true, nullable = false)
     @NotBlank

@@ -7,6 +7,6 @@ import org.springframework.data.repository.NoRepositoryBean;
 
 @NoRepositoryBean
 public interface AbstractMachinePropertyRepo<T extends MachineProperty> extends JpaRepository<T, Long> {
-    @Query(value = "SELECT TOP 1 * FROM MachineProperty WHERE propertyName = :propertyName", nativeQuery = true)
+    @Query(value = "SELECT TOP 1 * FROM MACHINES_PROPERTIES WHERE propertyName = :propertyName", nativeQuery = true)
     T findMachinePropertyByPropertyName(String propertyName);
 }

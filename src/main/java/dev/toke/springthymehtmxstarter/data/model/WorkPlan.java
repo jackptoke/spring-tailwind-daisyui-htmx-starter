@@ -12,13 +12,15 @@ import java.util.HashSet;
 import java.util.Set;
 
 
-@Entity(name = "WorkPlan")
+@Entity
+@Table(name = "WorkPlans")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 public class WorkPlan {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String description;
     private LocalDate startDate;

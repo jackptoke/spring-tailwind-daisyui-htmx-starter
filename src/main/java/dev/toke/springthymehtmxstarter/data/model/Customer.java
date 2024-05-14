@@ -2,6 +2,6 @@ package dev.toke.springthymehtmxstarter.data.model;
 
 import jakarta.persistence.Entity;
 
-@Entity(name = "Customer")
+@Entity(name = "CUSTOMERS")
 public class Customer extends Company {
 }

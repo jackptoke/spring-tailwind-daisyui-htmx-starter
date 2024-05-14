@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface UsersRolesRepo extends JpaRepository<UsersRoles, Long> {
-    @Query(value = "SELECT * FROM users_roles WHERE user_id = :userId", nativeQuery = true)
+    @Query(value = "SELECT * FROM UsersRoles WHERE user_id = :userId", nativeQuery = true)
     List<UsersRoles> findByUsersId(Long userId);
 }

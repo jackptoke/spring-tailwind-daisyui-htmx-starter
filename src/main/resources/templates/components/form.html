@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<form>
+    <div class="space-y-12">
+        <div class="border-b border-gray-900/10 pb-12">
+            <h2 class="text-base font-semibold leading-7 text-gray-900">New Component</h2>
+            <p class="mt-1 text-sm leading-6 text-gray-600">Please, ensure that the information are correct to the best of your ability.</p>
+
+            <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                <div class="col-span-2">
+                    <label for="component-name" class="block text-sm font-medium leading-6 text-gray-900">Component Name/Part Number</label>
+                    <div class="mt-2">
+                        <input type="text" name="component-name" id="component-name"
+                               class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                    </div>
+                </div>
+                <div class="col-span-4">
+                    <label for="component-description" class="block text-sm font-medium leading-6 text-gray-900">Component Description</label>
+                    <div class="mt-2">
+                        <textarea type="text" name="component-description" id="component-description" rows="3"
+                               class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                        </textarea>
+                    </div>
+                </div>
+                <div class="col-span-2">
+                    <label for="customer-part-number" class="block text-sm font-medium leading-6 text-gray-900">Customer Part Number</label>
+                    <div class="mt-2">
+                        <input type="text" name="customer-part-number" id="customer-part-number"
+                               class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                    </div>
+                </div>
+                <div class="col-span-2">
+                    <div>
+                        <label for="customer" class="block text-sm font-medium leading-6 text-gray-900">Customer</label>
+                        <select id="customer" name="customer" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            <option selected>Kenworth</option>
+                            <option>Ameint</option>
+                            <option>Thales</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-span-2">
+                    <label for="supplier-part-number" class="block text-sm font-medium leading-6 text-gray-900">Supplier Part Number</label>
+                    <div class="mt-2">
+                        <input type="text" name="supplier-part-number" id="supplier-part-number"
+                               class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                    </div>
+                </div>
+                <div class="col-span-2">
+                    <div>
+                        <label for="supplier" class="block text-sm font-medium leading-6 text-gray-900">Supplier</label>
+                        <select id="supplier" name="supplier" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            <option selected>Kenworth</option>
+                            <option>Ameint</option>
+                            <option>Thales</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-span-2">
+                    <label for="component-weight" class="block text-sm font-medium leading-6 text-gray-900">Weight Per Unit</label>
+                    <div class="mt-2">
+                        <input type="number" name="component-weight" id="component-weight"
+                               class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                    </div>
+                </div>
+                <div class="col-span-2">
+                    <div>
+                        <label for="component-weight-unit" class="block text-sm font-medium leading-6 text-gray-900">Weight Unit</label>
+                        <select id="component-weight-unit" name="component-weight-unit" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            <option selected>Kilogram</option>
+                            <option>Pound</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-span-2">
+                    <div>
+                        <label for="component-uom" class="block text-sm font-medium leading-6 text-gray-900">Purchase UOM</label>
+                        <select id="component-uom" name="component-uom" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            <option value="EA" selected>Each</option>
+                            <option value="MT">Meter</option>
+                            <option value="KG">Kilogram</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="sm:col-span-2">
+                    <div>
+                        <label for="revision" class="block text-sm font-medium leading-6 text-gray-900">Stock Group</label>
+                        <select id="revision" name="revision" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            <option>Component</option>
+                            <option selected>Harness</option>
+                            <option>Battery Harness</option>
+                            <option>Adaptor</option>
+                            <option>90 Degree Adaptor</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="sm:col-span-2">
+                    <div>
+                        <label for="worksite" class="block text-sm font-medium leading-6 text-gray-900">Work Site</label>
+                        <select id="worksite" name="worksite" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            <option selected>ARARAT</option>
+                            <option>MELBOURNE</option>
+                            <option>MALAYSIA</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="sm:col-span-2">
+                    <div>
+                        <label for="delivery-location" class="block text-sm font-medium leading-6 text-gray-900">Delivery Location</label>
+                        <select id="delivery-location" name="delivery-location" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            <option selected>CUTTING</option>
+                            <option>PRE ASSEMBLY</option>
+                            <option>BATTERY</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mt-6 flex items-center justify-end gap-x-6">
+            <button type="button" class="text-sm font-semibold leading-6 text-gray-900" th:hx-get="@{/batch-orders/home}"
+                    hx-target="#batch_order_page_content">Cancel</button>
+            <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" th:hx-get="@{/batch-orders/home}"
+                    hx-target="#batch_order_page_content">Save</button>
+        </div>
+    </div>
+
+</form>
+</body>
+</html>

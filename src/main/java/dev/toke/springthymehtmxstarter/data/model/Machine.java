@@ -10,13 +10,14 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-@Entity(name = "Machine")
+@Entity
+@Table(name = "Machines")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter @Setter
 public class Machine {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotBlank
     private String name;

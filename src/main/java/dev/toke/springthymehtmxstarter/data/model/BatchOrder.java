@@ -11,14 +11,15 @@ import lombok.Setter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-@Entity(name = "BatchOrder")
+@Entity
+@Table(name = "BatchOrders")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 public class BatchOrder {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotBlank
     private String harness;

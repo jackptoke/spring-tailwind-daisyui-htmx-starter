@@ -9,13 +9,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "Printer")
+@Table(name = "Printers")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter @Setter
 public class Printer {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotBlank
     private String printerName;

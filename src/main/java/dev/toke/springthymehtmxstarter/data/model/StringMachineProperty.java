@@ -4,7 +4,7 @@ import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import lombok.*;
 
-@Entity
+
 @Data
 @DiscriminatorValue("String")
 public class StringMachineProperty extends MachineProperty {

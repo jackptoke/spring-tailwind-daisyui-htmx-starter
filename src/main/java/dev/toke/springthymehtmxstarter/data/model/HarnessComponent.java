@@ -7,21 +7,21 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "PlanMachines")
+@Table(name = "HarnessComponents")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class PlanMachine {
+public class HarnessComponent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Integer cableThreshold = 40;
-    private Integer termAndSealThreshold = 40;
-    private Integer minimumLength = 60;
-    private Integer maximumLength = 5000;
-
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "machine_id")
-    private Machine machine;
+    @JoinColumn(name = "harness_id")
+    private Harness harness;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "component_id")
+    private MaterialComponent component;
+    private Double quantity;
+    private UnitOfMeasurement uom;
 }

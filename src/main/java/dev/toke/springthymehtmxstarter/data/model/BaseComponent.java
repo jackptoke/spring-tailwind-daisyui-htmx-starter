@@ -8,17 +8,20 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-@MappedSuperclass
+
+@Entity
+@Table(name = "BaseComponents")
+@Inheritance(strategy = InheritanceType.JOINED)
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class BaseComponent {
+public abstract class BaseComponent {
     @Id
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
-    private String partNumber;
+    private String name;  // name is the new part number
     private String customerPartNumber;
-    private String name;
     private String description;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId")
@@ -28,5 +31,7 @@ public class BaseComponent {
     @JoinColumn(name = "updatedByUser")
     private User updatedBy;
     private LocalDateTime updatedAt;
-    private UnitOfMaesurement uom;
+    private UnitOfMeasurement uom;
+    private ComponentGroup componentGroup = ComponentGroup.COMPONENT;
+
 }

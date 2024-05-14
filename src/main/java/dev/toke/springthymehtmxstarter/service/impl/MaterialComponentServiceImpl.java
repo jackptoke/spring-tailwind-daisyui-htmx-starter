@@ -25,18 +25,19 @@ public class MaterialComponentServiceImpl implements MaterialComponentService {
 
     @Override
     public MaterialComponent getMaterialComponentByPartNumber(String partNumber) {
-        return materialComponentRepo.findByPartNumber(partNumber);
+        return materialComponentRepo.findByName(partNumber);
     }
 
     @Override
     public MaterialComponent addComponent(MaterialComponent newComponent) {
-        var existing = materialComponentRepo.findByPartNumber(newComponent.getPartNumber());
+        var existing = materialComponentRepo.findByName(newComponent.getName());
         if(existing != null)
             throw new RuntimeException("Component already exists");
         if(newComponent.getId() != null)
             existing = materialComponentRepo.findById(newComponent.getId()).orElse(null);
         if(existing != null)
             throw new RuntimeException("Component already exists");
+
         return materialComponentRepo.save(newComponent);
     }
 
@@ -45,11 +46,11 @@ public class MaterialComponentServiceImpl implements MaterialComponentService {
         var existing = materialComponentRepo.findById(materialComponent.getId()).orElse(null);
         if(existing == null)
             throw new RuntimeException("Component not found");
-        if(!materialComponent.getPartNumber().equalsIgnoreCase(existing.getPartNumber())){
-            var existing2 = materialComponentRepo.findByPartNumber(materialComponent.getPartNumber());
+        if(!materialComponent.getName().equalsIgnoreCase(existing.getName())){
+            var existing2 = materialComponentRepo.findByName(materialComponent.getName());
             if(existing2 != null)
                 throw new RuntimeException("Part number already exists");
-            existing.setPartNumber(materialComponent.getPartNumber());
+            existing.setName(materialComponent.getName());
         }
         existing.setUpdatedAt(LocalDateTime.now());
         existing.setUpdatedBy(materialComponent.getUpdatedBy());

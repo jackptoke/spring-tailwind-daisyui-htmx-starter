@@ -1,13 +1,19 @@
 package dev.toke.springthymehtmxstarter.data.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Entity
+@Entity(name = "MACHINES_PROPERTIES")
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class MachinesProperties {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne

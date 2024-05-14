@@ -9,8 +9,8 @@ import java.util.List;
 
 @Repository
 public interface MachineRepo extends JpaRepository<Machine, Long> {
-    @Query(value = "SELECT * FROM Machine WHERE name = :nameOrIp OR ipAddress = :nameOrIp", nativeQuery = true)
+    @Query(value = "SELECT * FROM Machines WHERE name = :nameOrIp OR ipAddress = :nameOrIp", nativeQuery = true)
     List<Machine> findByMachineNameOrIpAddress(String nameOrIp);
-    @Query(value = "SELECT * FROM Machine WHERE name = :name ", nativeQuery = true)
+    @Query(value = "SELECT * FROM Machines WHERE name = :name ", nativeQuery = true)
     Machine findByMachineName(String name);
 }

@@ -2,6 +2,6 @@ package dev.toke.springthymehtmxstarter.data.model;
 
 import jakarta.persistence.Entity;
 
-@Entity(name = "Supplier")
+@Entity
 public class Supplier extends Company{
 }

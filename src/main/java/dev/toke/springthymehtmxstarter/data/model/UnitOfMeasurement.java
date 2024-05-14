@@ -1,6 +1,6 @@
 package dev.toke.springthymehtmxstarter.data.model;
 
-public enum UnitOfMaesurement {
+public enum UnitOfMeasurement {
     Each("EA"),
     Gallon("GA"),
     Inch("IN"),
@@ -10,7 +10,12 @@ public enum UnitOfMaesurement {
     Litre("LT");
 
     public final String name;
-    UnitOfMaesurement(String name) {
+    UnitOfMeasurement(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

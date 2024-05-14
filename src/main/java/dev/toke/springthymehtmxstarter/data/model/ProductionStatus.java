@@ -10,7 +10,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity(name = "WorkPlanStatus")
+@Entity(name = "WORK_PLAN_STATUSES")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
