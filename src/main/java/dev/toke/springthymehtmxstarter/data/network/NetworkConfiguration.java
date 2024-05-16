@@ -1,6 +1,8 @@
 package dev.toke.springthymehtmxstarter.data.network;
 
 import dev.toke.springthymehtmxstarter.data.api.ProductApi;
+import dev.toke.springthymehtmxstarter.data.api.WorkOrderApi;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.support.RestClientAdapter;
@@ -10,10 +12,13 @@ import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 
 @Configuration
 public class NetworkConfiguration {
+    @Value("${amesystems.api.url}")
+    private String BACKEND_URL;
+
     @Bean
     public WebClient webClient() {
         return WebClient.builder()
-                .baseUrl("https://fakestoreapi.com/")
+                .baseUrl(BACKEND_URL)
                 .build();
     }
 
@@ -32,5 +37,10 @@ public class NetworkConfiguration {
     @Bean
     public ProductApi productApi(HttpServiceProxyFactory httpServiceProxyFactory) {
         return httpServiceProxyFactory.createClient(ProductApi.class);
+    }
+
+    @Bean
+    public WorkOrderApi workOrderApi(HttpServiceProxyFactory httpServiceProxyFactory) {
+        return httpServiceProxyFactory.createClient(WorkOrderApi.class);
     }
 }

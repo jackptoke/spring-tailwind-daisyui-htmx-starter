@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html th:lang="|${#locale.language}-${#locale.country}|"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main}"
+>
+<body>
+<section layout:fragment="content" id="work_order_page_content" class="container w-5/6 h-screen mx-auto mb-auto">
+    <div th:replace="workorders/list"></div>
+</section>
+</body>
+</html>

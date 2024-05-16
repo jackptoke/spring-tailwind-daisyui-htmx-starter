@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div id="work-order-list" class="work-order-list container mx-auto mt-4 min-h-dvh w-full z-0 flex flex-col">
+        <h1>AME - Work Orders</h1>
+        <h2 th:each="order : ${workOrders}" th:text="${order.partNumber}"></h2>
+    </div>
+</body>
+</html>
