@@ -1,9 +1,96 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <body>
-<div id="work-order-list" class="work-order-list container mx-auto mt-4 min-h-dvh w-full z-0 flex flex-col">
-        <h1>AME - Work Orders</h1>
-        <h2 th:each="order : ${workOrders}" th:text="${order.partNumber}"></h2>
+    <div th:fragment="work-order-list(workOrders, OrderIds)"  class="px-4 sm:px-6 lg:px-8 w-full">
+        <div class="flex flex-row justify-between sm:items-center">
+            <div class="sm:flex-auto">
+                <h1 class="text-base font-semibold leading-6 text-gray-900">Work Orders</h1>
+                <p class="mt-2 text-sm text-gray-700">All open or released work orders that are available to creat a plan</p>
+            </div>
+            <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
+                <button type="button" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Creat Plan</button>
+            </div>
+        </div>
+        <div class="mt-8 flow-root w-full" th:x-data="'orders_data(' + *{OrderIds} + ')'">
+            <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                    <table th:fragment="users" id="users" class="min-w-full divide-y divide-gray-300">
+                        <thead>
+                        <tr>
+                            <th  class="px-4 relative py-3.5 pl-3 pr-4 sm:pr-0">
+                                <span x-text="all_selected ? 'Yes' : 'No'"></span>
+                                <input id="all-orders-checkbox" aria-describedby="comments-description"
+                                       name="comments" type="checkbox"
+                                       class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                                       @change="toggleAll"
+                                       :checked="isAllSelected"
+
+                            ></th>
+                            <th class="text-start px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Batch Number</th>
+                            <th class="text-start py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Harness</th>
+                            <th class="text-start py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Revision</th>
+                            <th class="text-start px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Quantity</th>
+                            <th class="text-start px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Status</th>
+                            <th class="text-start px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Release due</th>
+                            <th class="text-start px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Due in store</th>
+                            <th class="text-start px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Released on</th>
+                            <th class="text-start px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Work Site</th>
+                            <th class="text-start px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Delivery Site</th>
+                            <th class="text-start px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Do not release</th>
+                            <th>Is Active</th>
+                            <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-0">
+                                <span class="sr-only">Edit</span>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr id="order-detail" class="order-detail"  th:each="order : ${workOrders}">
+                            <td class="px-4 text-center relative py-3.5 pl-3 pr-4 sm:pr-0">
+                                <input th:id="${ 'order-id-' + order.getId() }" aria-describedby="comments-description"
+                                       name="comments" type="checkbox"
+                                       class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                                       th:value="${order.getId()}"
+                                       x-model="selected_orders"
+                                >
+                            </td>
+                            <td th:text="${order.getId()}"></td>
+                            <td th:text="${order.getPartNumber()}" class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0"></td>
+                            <td th:text="${order.getRevision()}" class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0"></td>
+                            <td th:text="${order.getQuantity()}" class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
+                            <td th:text="${order.getIsCompleted()}" class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
+                            <td th:text="${order.getReleaseByDate()}" class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
+                            <td th:text="${order.getDispatchByDate()}" class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
+                            <td th:text="${order.getReleasedDate()}" class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
+                            <td th:text="${order.getWorkSite()}" class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
+                            <td th:text="${order.getDeliveryLocation()}" class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
+                            <td th:text="${order.getDoNotRelease()}" class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
+                            <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
+                                <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit<span class="sr-only">, Lindsay Walton</span></a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <script>
+                document.addEventListener('alpine:init', () => {
+                    Alpine.data('orders_data', (initialOpenState = []) => ({
+                        selected_orders: [],
+                        orderIds: initialOpenState,
+                        toggleAll() {
+                            if (this.selected_orders.length === this.orderIds.length)
+                                this.selected_orders = []
+                            else
+                                this.selected_orders = this.orderIds
+                        },
+                        isAllSelected() {
+                            return this.selected_orders.length === this.orderIds.length
+                        }
+                    }))
+                })
+            </script>
+        </div>
     </div>
+
 </body>
 </html>

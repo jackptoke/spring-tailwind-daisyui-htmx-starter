@@ -16,12 +16,12 @@ public class WorkOrder {
     private Long id;
     private String partNumber;
     private String revision;
+    private String customer;
     private Integer quantity;
     private Boolean isCompleted;
     private String status;
     private String specialCode;
     private String unitOfMaesurement;
-    private String customer;
     private Integer quantityIssued;
     private Boolean plDone;
     private Boolean isUnReleased;
@@ -35,6 +35,20 @@ public class WorkOrder {
     private String insertedByUser;
     private LocalDateTime updatedDate;
     private String updatedByUser;
-    private LocalDateTime releasedDate;
-    private LocalDate dueDate;
+    private LocalDate dispatchByDate;
+    private LocalDate releaseByDate;
+    private LocalDate releasedDate;
+    private Boolean doNotRelease;
 }
+/*
+        Case "P"
+          row.StatusText = "Pending"
+        Case "O"
+          row.StatusText = "Open"
+        Case "R"
+          row.StatusText = "Released"
+        Case "C"
+          row.StatusText = "Closed"
+        Case Else
+          row.StatusText = "Unknown"
+ */
