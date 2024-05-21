@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="work-order-list(plans)"  class="px-4 sm:px-6 lg:px-8 w-full">
+    <div class="flex flex-row justify-between sm:items-center">
+        <div class="sm:flex-auto">
+            <h1 class="text-base font-semibold leading-6 text-gray-900">Plans</h1>
+            <p class="mt-2 text-sm text-gray-700">These are the most recent 100 plans</p>
+        </div>
+        <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
+            <button type="button"
+                    class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    th:hx-get="@{/plans/new}"
+                    hx-target="#plan_page_content"
+
+            >Creat Plan</button>
+        </div>
+    </div>
+    <div class="mt-8 flow-root w-full">
+        <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                <table th:fragment="users" id="users" class="min-w-full divide-y divide-gray-300">
+                    <thead>
+                    <tr>
+                        <th  class="px-4 relative py-3.5 pl-3 pr-4 sm:pr-0">
+                            <span x-text="all_selected ? 'Yes' : 'No'"></span>
+                            <input id="all-orders-checkbox" aria-describedby="comments-description"
+                                   name="comments" type="checkbox"
+                                   class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                            ></th>
+                        <th class="text-start px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Plan #</th>
+                        <th class="text-start py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Description</th>
+                        <th class="text-start py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Start Date</th>
+                        <th class="text-start px-3 py-3.5 text-left text-sm font-semibold text-gray-900">End Date</th>
+                        <th class="text-start px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Run Date</th>
+                        <th class="text-start px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Priority</th>
+                        <th class="text-start px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Production Status</th>
+                        <th class="text-start px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Transfer Status</th>
+                        <th class="text-start px-3 py-3.5 text-left text-sm font-semibold text-gray-900"># of Batches</th>
+                        <th class="text-start px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Last Updated By</th>
+                        <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-0">
+                            <span class="sr-only">Edit</span>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tr th:each="plan : ${ plans }">
+                        <td class="px-4 text-center relative py-3.5 pl-3 pr-4 sm:pr-0">
+                            <input th:id="${ 'order-id-' + plan.id() }" aria-describedby="comments-description"
+                                   name="comments" type="checkbox"
+                                   class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                                   th:value="${plan.id()}"
+                                   x-model="selected_orders"
+                            >
+                        </td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" th:text="${plan.id()}"></td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" th:text="${plan.description()}"></td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" th:text="${plan.startDate()}"></td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" th:text="${plan.endDate()}"></td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" th:text="${plan.runDate()}"></td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" th:text="${plan.priority()}"></td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" th:text="${plan.productionStatus()}"></td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" th:text="${plan.transferStatus()}"></td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" th:text="${plan.numberOfBatches()}"></td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" th:text="${plan.lastUpdateAt()}"></td>
+                        <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
+                            <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit<span class="sr-only">, Lindsay Walton</span></a>
+                        </td>
+                    </tr>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

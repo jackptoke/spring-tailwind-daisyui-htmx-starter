@@ -3,10 +3,10 @@
       xmlns:th="http://www.thymeleaf.org"
 >
 <body>
-    <div th:fragment="plan-form" id="plan-form" class="container mx-auto flex min-h-dvh flex-col">
+    <div th:fragment="plan-form(plan, priorities, unplannedBatches)" id="plan-form" class="container mx-auto flex min-h-dvh flex-col">
         <form method="dialog" th:action="@{/plans}" th:object="${plan}"
         >
-            <div class="grid grid-cols-6 gap-3 mt-10">
+            <div class="grid grid-cols-6 gap-3 mt-1">
                 <div class="col-span-6" ><p class="text-2xl text-blue-800 font-bold">New Plan</p></div>
 
                 <div class="text-start col-span-3">
@@ -14,26 +14,93 @@
                     <input id="plan-description" type="text" name="plan-description"
                            class="input iborder-2 border-gray-300 rounded px-3 py-2 w-full"
                            placeholder="Description"
-                           th:field="*{description}"
+
                     />
                 </div>
 
 
                 <div class="text-start  col-span-1">
-                    <lable class="text-lg font-semibold">Choose Date</lable> <br>
+                    <lable class="text-lg font-semibold">Start Date</lable> <br>
                     <input id="datepicker-start" class="datepicker border-2 border-gray-300 rounded px-3 py-2 w-56" type="date"
                            placeholder="Select a date">
                 </div>
 
                 <div class="text-start  col-span-1 w-full">
-                    <lable class="text-lg font-semibold">Choose Date</lable> <br>
+                    <lable class="text-lg font-semibold">Released by</lable> <br>
                     <input id="datepicker-run" class="datepicker border-2 border-gray-300 rounded px-3 py-2 w-56" type="date"
                            placeholder="Select a date">
                 </div>
                 <div class="text-start  w-full col-span-1">
-                    <lable class="text-lg font-semibold">Choose Date</lable> <br>
+                    <lable class="text-lg font-semibold">Priority</lable> <br>
                     <select class="select border-2 border-gray-300 rounded px-3 py-2 w-56  col-span-2">
                         <option th:each="priority : ${priorities}" th:text="${priority}" th:value="${priority}"></option>
+                    </select>
+                </div>
+                <div class="text-start  w-full col-span-1">
+                    <lable class="text-lg font-semibold">Customer</lable> <br>
+                    <select class="select border-2 border-gray-300 rounded px-3 py-2 w-56  col-span-2">
+                        <option>Kenworth</option>
+                        <option>Boeing</option>
+                        <option>Metro</option>
+                    </select>
+                </div>
+                <div class="text-start  w-full col-span-1">
+                    <lable class="text-lg font-semibold">Harness</lable> <br>
+                    <select class="select border-2 border-gray-300 rounded px-3 py-2 w-56  col-span-2">
+                        <option>Harness 1</option>
+                        <option>Harness 2</option>
+                        <option>Harness 3</option>
+                    </select>
+                </div>
+                <div class="text-start  w-full col-span-1">
+                    <lable class="text-lg font-semibold">Start Site</lable> <br>
+                    <select class="select border-2 border-gray-300 rounded px-3 py-2 w-56  col-span-2">
+                        <option>Ararat</option>
+                        <option>Melbourne</option>
+                        <option>Malaysia</option>
+                    </select>
+                </div>
+                <div class="text-start  w-full col-span-1">
+                    <lable class="text-lg font-semibold">Start Location</lable> <br>
+                    <select class="select border-2 border-gray-300 rounded px-3 py-2 w-56  col-span-2">
+                        <option>Cutting</option>
+                        <option>Pre-assembly</option>
+                        <option>Blue</option>
+                    </select>
+                </div>
+                <div class="text-start  w-full col-span-1">
+                    <lable class="text-lg font-semibold">Delivery Site</lable> <br>
+                    <select class="select border-2 border-gray-300 rounded px-3 py-2 w-56  col-span-2">
+                        <option>Ararat</option>
+                        <option>Melbourne</option>
+                        <option>Malaysia</option>
+                    </select>
+                </div>
+                <div class="text-start  w-full col-span-1">
+                    <lable class="text-lg font-semibold">Delivery Location</lable> <br>
+                    <select class="select border-2 border-gray-300 rounded px-3 py-2 w-56  col-span-2">
+                        <option>Cutting</option>
+                        <option>Pre-assembly</option>
+                        <option>Blue</option>
+                    </select>
+                </div>
+                <div class="text-start  w-full col-span-1">
+                    <lable class="text-lg font-semibold">Quantity</lable> <br>
+                    <input id="quantity" type="number" name="plan-description"
+                           class="input iborder-2 border-gray-300 rounded px-3 py-2 w-full"
+                           placeholder="Description"
+
+                    />
+                </div>
+                <div class="text-start  w-full col-span-1">
+                    <lable class="text-lg font-semibold">Special Code</lable> <br>
+                    <select class="select border-2 border-gray-300 rounded px-3 py-2 w-56  col-span-2">
+                        <option>00 - Standard</option>
+                        <option>03 - Rebuild</option>
+                        <option>04 - Component</option>
+                        <option>06 - Injection</option>
+                        <option>10 - KW Kanban</option>
+                        <option>99 - Under Lead Time</option>
                     </select>
                 </div>
             </div>

@@ -48,7 +48,7 @@ public class BatchOrder {
     private LocalDateTime updatedDate;
     private String insertedBy;
     private String updatedBy;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "workplan_id")
-    private WorkPlan workPlan;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "workplan_id")
+//    private WorkPlan workPlan;
 }

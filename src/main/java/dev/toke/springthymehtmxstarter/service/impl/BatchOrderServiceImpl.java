@@ -20,7 +20,7 @@ public class BatchOrderServiceImpl implements BatchOrderService {
 
     @Override
     public List<BatchOrder> getUnplannedBatchOrders() {
-        return batchOrderRepo.findAllUnplannedBatchOrders();
+        return List.of();
     }
 
     @Override
@@ -57,7 +57,7 @@ public class BatchOrderServiceImpl implements BatchOrderService {
         batch.setDispatchedDate(batchOrder.getDispatchedDate());
         batch.setUpdatedBy(batchOrder.getUpdatedBy());
         batch.setUpdatedDate(batchOrder.getUpdatedDate());
-        batch.setWorkPlan(batchOrder.getWorkPlan());
+//        batch.setWorkPlan(batchOrder.getWorkPlan());
         return batchOrderRepo.save(batch);
     }
 

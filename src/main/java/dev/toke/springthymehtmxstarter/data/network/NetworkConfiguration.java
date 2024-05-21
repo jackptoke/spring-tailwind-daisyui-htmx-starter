@@ -2,6 +2,7 @@ package dev.toke.springthymehtmxstarter.data.network;
 
 import dev.toke.springthymehtmxstarter.data.api.ProductApi;
 import dev.toke.springthymehtmxstarter.data.api.WorkOrderApi;
+import dev.toke.springthymehtmxstarter.data.api.WorkPlanApi;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,10 +15,12 @@ import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 public class NetworkConfiguration {
     @Value("${amesystems.api.url}")
     private String BACKEND_URL;
+    private final int BUFFER_SIZE = 16*1024*1024;
 
     @Bean
     public WebClient webClient() {
         return WebClient.builder()
+                .codecs(codecs -> codecs.defaultCodecs().maxInMemorySize(BUFFER_SIZE))
                 .baseUrl(BACKEND_URL)
                 .build();
     }
@@ -42,5 +45,10 @@ public class NetworkConfiguration {
     @Bean
     public WorkOrderApi workOrderApi(HttpServiceProxyFactory httpServiceProxyFactory) {
         return httpServiceProxyFactory.createClient(WorkOrderApi.class);
+    }
+
+    @Bean
+    public WorkPlanApi workPlanApi(HttpServiceProxyFactory httpServiceProxyFactory) {
+        return httpServiceProxyFactory.createClient(WorkPlanApi.class);
     }
 }

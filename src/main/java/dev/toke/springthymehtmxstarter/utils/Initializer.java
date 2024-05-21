@@ -119,7 +119,7 @@ public class Initializer {
                          customer, siteName, deliverySite, deliveryLocation, releaseLocation,
                         "", null, releaseDueDate,
                         null, null, LocalDateTime.now(), null,
-                        "jackt", "", null);
+                        "jackt", "");
                 batchOrderService.createBatchOrder(batchOrder);
             }
         }
