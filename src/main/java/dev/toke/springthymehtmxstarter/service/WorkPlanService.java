@@ -1,5 +1,6 @@
 package dev.toke.springthymehtmxstarter.service;
 
+import dev.toke.springthymehtmxstarter.data.dto.CuttingJobDto;
 import dev.toke.springthymehtmxstarter.data.dto.WorkPlanDto;
 
 import java.time.LocalDate;
@@ -9,6 +10,7 @@ public interface WorkPlanService {
     List<WorkPlanDto> getWorkPlans(LocalDate from, LocalDate to);
     WorkPlanDto getWorkPlanById(Long id);
     WorkPlanDto createWorkPlan(WorkPlanDto workPlanDto);
+    List<CuttingJobDto> getCuttingJobs(Long id);
 //    WorkPlan updateWorkPlan(WorkPlan workPlan);
 //    void deleteWorkPlan(Long id);
 }

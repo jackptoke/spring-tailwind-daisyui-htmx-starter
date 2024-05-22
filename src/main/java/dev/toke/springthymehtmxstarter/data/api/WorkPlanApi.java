@@ -1,5 +1,6 @@
 package dev.toke.springthymehtmxstarter.data.api;
 
+import dev.toke.springthymehtmxstarter.data.dto.CuttingJobDto;
 import dev.toke.springthymehtmxstarter.data.dto.WorkPlanDto;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,4 +16,7 @@ public interface WorkPlanApi {
 
     @GetExchange("/plans/{planId}")
     WorkPlanDto getWorkPlan(@PathVariable(name = "planId") Long planId);
+
+    @GetExchange("/plans/{planId}/jobs")
+    List<CuttingJobDto> getCuttingJobs(@PathVariable(name = "planId") Long planId);
 }

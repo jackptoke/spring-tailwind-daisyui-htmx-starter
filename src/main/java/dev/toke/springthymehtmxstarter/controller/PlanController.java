@@ -62,6 +62,19 @@ public class PlanController {
         return "plans/plan_form :: plan-form";
     }
 
+    @GetMapping("/machines")
+    public String selectPlanMachines(Model model) {
+        log.info("Machine selection page");
+        model.addAttribute("plan", new PlanFormData());
+        model.addAttribute("cuttingJobs", workPlanService.getCuttingJobs(7671L));
+
+//        model.addAttribute("priorities", PlanPriority.values());
+//        var unplannedBatches = batchOrderService.getUnplannedBatchOrders().stream().map(BatchOrderData::from);
+//        model.addAttribute("unplannedBatches", unplannedBatches);
+
+        return "plans/plan_machines :: plan-machines";
+    }
+
     @GetMapping("/day/{day}/month/{month}/year/{year}")
     public String changeDate(Model model,
                              @PathVariable int day,
