@@ -1,10 +1,12 @@
 package dev.toke.springthymehtmxstarter.controller;
 
+import dev.toke.springthymehtmxstarter.data.dto.MachineConfigFormData;
+import dev.toke.springthymehtmxstarter.data.dto.MachineConfigurationDto;
+import dev.toke.springthymehtmxstarter.data.dto.MachineDto;
 import dev.toke.springthymehtmxstarter.data.dto.MachineFormData;
 import dev.toke.springthymehtmxstarter.data.model.PrintColour;
 import dev.toke.springthymehtmxstarter.data.model.User;
 import dev.toke.springthymehtmxstarter.events.ResetMachineDataEvent;
-import dev.toke.springthymehtmxstarter.data.model.Machine;
 import dev.toke.springthymehtmxstarter.service.MachineService;
 import dev.toke.springthymehtmxstarter.service.UserService;
 import io.github.wimdeblauwe.htmx.spring.boot.mvc.HtmxRequest;
@@ -13,14 +15,12 @@ import io.github.wimdeblauwe.htmx.spring.boot.mvc.HxRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
 
 @Controller
 @RequestMapping("/machines")
@@ -34,7 +34,20 @@ public class MachineController {
     @GetMapping
     public String index(Model model, HtmxRequest htmxRequest) {
         log.info("Retrieving all machines");
-        model.addAttribute("machines", machineService.getMachines());
+        var machines = machineService.getMachines();
+        log.info("# machines retrieved: {}", machines.size());
+        for (var machine : machines) {
+            if(machine.getConfiguration() == null)
+                machine.setConfiguration(new MachineConfigurationDto());
+        }
+        model.addAttribute("machines", machines);
+        if(!machines.isEmpty()) {
+            model.addAttribute("displayMachine", machines.get(0));
+        }
+        else {
+            model.addAttribute("machineConfig", new MachineDto());
+        }
+
         if(htmxRequest.isHtmxRequest()) {
             log.info("HtmxRequest received for machines data");
             log.info("Machines #: " + machineService.getMachines().size());
@@ -59,18 +72,19 @@ public class MachineController {
         return "machines/machine_form :: machine_form";
     }
 
+
     @GetMapping("/{id}")
-    public String show(@PathVariable Long id, Model model) {
+    public String show(@PathVariable Integer id, Model model) {
         log.info("Retrieving machine with id {}", id);
 
-        Machine machine = machineService.getMachineById(id);
-        model.addAttribute("page_title", "Machine " + machine.getName());
+        MachineDto machine = machineService.getMachineById(id);
+        model.addAttribute("page_title", "Machine " + machine.getMachineName());
         model.addAttribute("machine", toMachineFormData(machine));
         return "machines/machine_form :: machine_form";
     }
 
     @DeleteMapping(value = "/{id}")
-    public HtmxResponse delete(Model model, @PathVariable long id, RedirectAttributes redirectAttributes,
+    public HtmxResponse delete(Model model, @PathVariable Integer id, RedirectAttributes redirectAttributes,
                          HtmxRequest htmxRequest) {
         log.info("Delete button {}", htmxRequest.getTriggerId());
         log.info("Deleting machine with id {}", id);
@@ -95,20 +109,21 @@ public class MachineController {
         User user = userService.findByUsername("jackptoke");
 
         machineService.addMachine(
-            new Machine(
+            new MachineDto(
             null,
             machineData.getMachineName(),
-            machineData.getDescription(),
             machineData.getMachineBrand(),
             machineData.getMachineModel(),
+                    machineData.getSerialNumber(),
                     machineData.getDataPath(),
                     machineData.getFeedbackPath(),
-                    machineData.getIsActive(),
-                    user,
                     LocalDateTime.now(),
-                    null,
-                    "",
-                    new HashSet<>()));
+                    user.getUsername(),
+                    LocalDateTime.now(),
+                    user.getUsername(),
+                    1234,
+                    machineData.getIsActive(),
+                    14, null));
         model.addAttribute("machine", new MachineFormData());
 //        return HtmxResponse.builder()
 //                .view("index :: machines")
@@ -124,17 +139,16 @@ public class MachineController {
         return "fragments/machines :: machine-list";
     }
 
-    private MachineFormData toMachineFormData(Machine machine) {
+    private MachineFormData toMachineFormData(MachineDto machine) {
         return new MachineFormData(machine.getId(),
-                machine.getName(),
-                machine.getDescription(),
-                machine.getBrand(),
-                machine.getModel(),
-                machine.getDataPath(),
-                machine.getFeedbackPath(),
-                machine.getIsActive(),
-                machine.getUser(),
-                machine.getProperties()
+                machine.getMachineName(),
+                machine.getMachineType(),
+                machine.getMachineSubType(),
+                machine.getSerialNumber(),
+                machine.getWpcsDataPath(),
+                machine.getWpcsFeedbackPath(),
+                machine.getIsInUse(),
+                machine.getUpdatedBy()
                 );
     }
 

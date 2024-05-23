@@ -18,16 +18,16 @@ import java.util.Set;
 @Setter
 @Getter
 public class MachineFormData {
-    private Long id;
+    private Integer id;
     @NotBlank
     private String machineName;
-    private String description = "";
     @NotBlank
     private String machineBrand;
     private String machineModel = "";
+    private String serialNumber = "";
     private String dataPath = ""; // WPCS folder uri
     private String feedbackPath = ""; // WPCS feedback uri
     private Boolean isActive = true;
-    private User user;
-    private Set<MachinesProperties> properties;
+    private String user;
+//    private Set<MachinesProperties> properties;
 }

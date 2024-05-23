@@ -1,11 +1,13 @@
 package dev.toke.springthymehtmxstarter.controller;
 
 import dev.toke.springthymehtmxstarter.data.dto.BatchOrderData;
+import dev.toke.springthymehtmxstarter.data.dto.MachineConfigFormData;
 import dev.toke.springthymehtmxstarter.data.dto.PlanFormData;
 import dev.toke.springthymehtmxstarter.data.dto.WorkPlanDto;
 import dev.toke.springthymehtmxstarter.data.dto.display.PlanDisplay;
 import dev.toke.springthymehtmxstarter.data.model.PlanPriority;
 import dev.toke.springthymehtmxstarter.service.BatchOrderService;
+import dev.toke.springthymehtmxstarter.service.MachineService;
 import dev.toke.springthymehtmxstarter.service.WorkPlanService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +31,7 @@ import java.time.temporal.TemporalAdjusters;
 public class PlanController {
     private final WorkPlanService workPlanService;
     private final BatchOrderService batchOrderService;
+    private final MachineService machineService;
 
     @GetMapping
     public String index(Model model) {
@@ -66,13 +69,28 @@ public class PlanController {
     public String selectPlanMachines(Model model) {
         log.info("Machine selection page");
         model.addAttribute("plan", new PlanFormData());
+        model.addAttribute("machines", machineService.getMachines());
         model.addAttribute("cuttingJobs", workPlanService.getCuttingJobs(7671L));
+        var machineConfigData = new MachineConfigFormData(1,
+                "Some machine", 40, 40,
+                40, 240, 5000,
+                true, true, true,
+                true, "BLACK");
+        model.addAttribute("machineConfig", machineConfigData);
 
 //        model.addAttribute("priorities", PlanPriority.values());
 //        var unplannedBatches = batchOrderService.getUnplannedBatchOrders().stream().map(BatchOrderData::from);
 //        model.addAttribute("unplannedBatches", unplannedBatches);
 
         return "plans/plan_machines :: plan-machines";
+    }
+
+    @GetMapping("/optimize")
+    public String optimizePlan(Model model) {
+        log.info("Optimize jobs");
+        model.addAttribute("plan", new PlanFormData());
+        model.addAttribute("cuttingJobs", workPlanService.getCuttingJobs(7671L));
+        return "plans/plan_optimize :: plan-machines";
     }
 
     @GetMapping("/day/{day}/month/{month}/year/{year}")

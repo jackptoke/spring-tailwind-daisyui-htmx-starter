@@ -1,5 +1,7 @@
 package dev.toke.springthymehtmxstarter.service.impl;
 
+import dev.toke.springthymehtmxstarter.data.api.MachineApi;
+import dev.toke.springthymehtmxstarter.data.dto.MachineDto;
 import dev.toke.springthymehtmxstarter.data.model.Machine;
 import dev.toke.springthymehtmxstarter.repository.MachineRepo;
 import dev.toke.springthymehtmxstarter.service.MachineService;
@@ -11,56 +13,33 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class MachineServiceImpl implements MachineService {
-    private final MachineRepo machineRepo;
+//    private final MachineRepo machineRepo;
+    private final MachineApi machineApi;
 
     @Override
-    public List<Machine> getMachines() {
-        return machineRepo.findAll();
+    public List<MachineDto> getMachines() {
+        return machineApi.getMachines();
+    }
+
+
+    @Override
+    public MachineDto getMachineById(Integer id) {
+        return machineApi.getMachine(id);
     }
 
     @Override
-    public List<Machine> getMachine(String nameOrIp) {
-        return machineRepo.findByMachineNameOrIpAddress(nameOrIp);
+    public MachineDto addMachine(MachineDto machine) {
+
+        return machineApi.createMachine(machine);
     }
 
     @Override
-    public Machine getMachineById(Long id) {
-        return machineRepo.findById(id).orElse(null);
+    public MachineDto updateMachine(Integer id, MachineDto machine) {
+        return machineApi.updateMachine(id, machine);
     }
 
     @Override
-    public Machine getMachineByName(String name) {
-        return machineRepo.findByMachineName(name);
-    }
-
-    @Override
-    public Machine addMachine(Machine machine) {
-        Machine currentMachine;
-        if(machine.getId() != null)
-            currentMachine = machineRepo.findById(machine.getId()).orElse(null);
-        else
-            currentMachine = machineRepo.findByMachineName(machine.getName());
-        if(currentMachine != null) throw new RuntimeException("Machine already exists");
-
-        return machineRepo.save(machine);
-    }
-
-    @Override
-    public Machine updateMachine(Machine machine) {
-        Machine currentMachine = machineRepo.findById(machine.getId()).orElse(null);
-        if(currentMachine == null) throw new RuntimeException("Machine not found");
-        currentMachine.setName(machine.getName());
-        currentMachine.setBrand(machine.getBrand());
-        currentMachine.setModel(machine.getModel());
-        currentMachine.setDescription(machine.getDescription());
-        currentMachine.setDataPath(machine.getDataPath());
-        currentMachine.setFeedbackPath(machine.getFeedbackPath());
-        currentMachine.setIsActive(machine.getIsActive());
-        return machineRepo.save(currentMachine);
-    }
-
-    @Override
-    public void deleteMachine(Long id) {
-        machineRepo.deleteById(id);
+    public void deleteMachine(Integer id) {
+        machineApi.deleteMachine(id);
     }
 }

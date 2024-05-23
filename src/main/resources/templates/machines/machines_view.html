@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html th:lang="|${#locale.language}-${#locale.country}|"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<body>
+<div th:fragment="machines_view(machines)" id="plan-form" class="container mx-auto flex h-screen flex-col">
+    <div class="flex min-h-full flex-col">
+
+        <div class="mx-auto w-full grow py-6 lg:flex xl:px-2">
+            <!-- Left sidebar & main wrapper -->
+            <div class="flex-1 xl:flex">
+                <div class="border-b border-gray-200 px-6 sm:px-6 lg:pl-8 xl:w-64 xl:shrink-0 xl:border-b-0 xl:border-r xl:pl-6 mt-10">
+                    <!-- Left column area -->
+                    <fieldset>
+                        <div class="relative flex items-start py-4">
+                            <div class="min-w-0 flex-1 text-sm leading-6">
+                                <legend class="text-base font-semibold leading-6 text-gray-900">All Machines</legend>
+                            </div>
+
+                        </div>
+
+                        <div class="mt-4 divide-y divide-gray-200 border-b border-t border-gray-200">
+                            <div class="relative" th:each="machine : ${ machines }">
+                                <div class="flex items-center w-full h-12  hover:bg-indigo-300 py-5 px-4">
+                                    <div class="min-w-0 flex-1 text-sm leading-6">
+                                        <!--/*@thymesVar id="machine" type="dev.toke.springthymehtmxstarter.data.dto.MachineDto"*/-->
+                                        <!--/*@thymesVar id="getMachineName" type="java.lang.String"*/-->
+                                        <label th:for="${ 'machine-' + machine.getId() }" class="select-none font-medium text-gray-900" th:text="${ machine.getMachineName() }">Cutting</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                </div>
+
+                <div class="px-4 py-6 sm:px-6 lg:pl-8 xl:flex-1 xl:pl-6">
+                    <!-- Main area -->
+                    <div class="flow-root w-full">
+                        <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                            <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                                <div th:replace="machines/machine_config_form"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+</body>
+</html>

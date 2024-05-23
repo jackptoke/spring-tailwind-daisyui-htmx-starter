@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <body>
-    <div id="user-list" class="user-list container mx-auto mt-4 min-h-dvh w-full z-0 flex flex-col">
-        <div class="py-12">
+    <div id="user-list" class="user-list px-4 sm:px-6 lg:px-8 w-full">
+        <div class="flex flex-row justify-between sm:items-center">
+            <div class="sm:flex-auto">
+                <h1 class="text-base font-semibold leading-6 text-gray-900">Users</h1>
+                <p class="mt-2 text-sm text-gray-700">These are the most recent 100 plans</p>
+            </div>
             <div class="flex justify-between">
                 <div class="grow"></div>
                 <div class="grow-0">
@@ -10,59 +14,59 @@
                             th:hx-get="@{/users/new}"
                             hx-target="#users_page_content"
                     >
-                        <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                            <path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
-                        </svg>
+                        Add User
                     </button>
                 </div>
             </div>
-            <div class="overflow-x-auto w-full">
-                <table th:fragment="users" id="users" class="table table-zebra w-full">
-                    <!-- head -->
-                    <caption class="caption-top">
-                    Users
-                    </caption>
-                    <thead>
-                    <tr>
-                        <th></th>
-                        <th class="text-start">Username</th>
-                        <th class="text-start">Email</th>
-                        <th>Is Active</th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <!-- row 1 -->
-                    <tr id="user-detail" class="user-detail"
-                        th:each="user : ${ users }">
-                        <th th:text="${user.id()}">1</th>
-                        <td th:text="${user.username()}">Cy Ganderton</td>
-                        <td th:text="${user.email()}">Quality Control Specialist</td>
-                        <td class="text-center">
-                            <input type="checkbox" class="toggle toggle-success" th:checked="${ user.isActive() }" />
-                        </td>
-                        <td>
-                            <button
-                                    class="rounded-md bg-green-700 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-red-600 focus-visible:outline-red-600 w-16"
-                                    hx-swap="outerHTML"
-                                    th:hx-delete="@{/users/{username}(username=${user.username()})}"
-                                    hx-target="closest #users"
-                            >
-                                Edit
-                            </button>
-                            <button
-                                    class="rounded-md bg-red-500 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-red-600 focus-visible:outline-red-600 w-16"
-                                    hx-swap="outerHTML"
-                                    th:hx-delete="@{/users/{username}(username=${user.username()})}"
-                                    hx-target="closest #users"
-                            >
-                                Delete
-                            </button>
-                        </td>
-                    </tr>
+        </div>
 
-                    </tbody>
-                </table>
+        <div class="mt-8 flow-root w-full">
+            <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                    <table th:fragment="users" id="users" class="min-w-full divide-y divide-gray-300">
+                        <!-- head -->
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th  class="text-start px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Username</th>
+                            <th class="text-start py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Email</th>
+                            <th class="text-start px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Is Active</th>
+                            <th class="relative py-3.5 pl-3 pr-4 sm:pr-0"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!-- row 1 -->
+                        <tr id="user-detail" class="user-detail"
+                            th:each="user : ${ users }">
+                            <th class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" th:text="${user.id()}">1</th>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" th:text="${user.username()}">Cy Ganderton</td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" th:text="${user.email()}">Quality Control Specialist</td>
+                            <td class="text-center">
+                                <input type="checkbox" class="toggle toggle-success" th:checked="${ user.isActive() }" />
+                            </td>
+                            <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
+                                <button
+                                        class="rounded-md bg-green-700 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-red-600 focus-visible:outline-red-600 w-16"
+                                        hx-swap="outerHTML"
+                                        th:hx-delete="@{/users/{username}(username=${user.username()})}"
+                                        hx-target="closest #users"
+                                >
+                                    Edit
+                                </button>
+                                <button
+                                        class="rounded-md bg-red-500 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-red-600 focus-visible:outline-red-600 w-16"
+                                        hx-swap="outerHTML"
+                                        th:hx-delete="@{/users/{username}(username=${user.username()})}"
+                                        hx-target="closest #users"
+                                >
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

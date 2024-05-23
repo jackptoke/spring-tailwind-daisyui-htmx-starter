@@ -4,7 +4,7 @@
 >
 <body>
     <div th:fragment="plan-form(plan, priorities, unplannedBatches)" id="plan-form" class="container mx-auto flex min-h-dvh flex-col">
-       <div class="w-full">
+       <div class="flex flex-row">
         <nav aria-label="Progress" class="md:flex md:items-center md:justify-between">
             <ol role="list" class="divide-y divide-gray-300 rounded-md border border-gray-300 md:flex md:divide-y-0">
                 <li class="relative md:flex md:flex-1">
@@ -33,7 +33,7 @@
                             <span class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full border-2 border-gray-300 group-hover:border-gray-400">
                               <span class="text-gray-500 group-hover:text-gray-900">02</span>
                             </span>
-                            <span class="ml-4 text-sm font-medium text-gray-500 group-hover:text-gray-900">Machine Selection</span>
+                            <span class="ml-4 text-sm font-medium text-gray-500 group-hover:text-gray-900">Machine Configuration</span>
                         </span>
                     </a>
                     <!-- Arrow separator for lg screens and up -->
@@ -50,18 +50,21 @@
                           <span class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full border-2 border-gray-300 group-hover:border-gray-400">
                             <span class="text-gray-500 group-hover:text-gray-900">03</span>
                           </span>
-                          <span class="ml-4 text-sm font-medium text-gray-500 group-hover:text-gray-900">Machine Configuration</span>
+                          <span class="ml-4 text-sm font-medium text-gray-500 group-hover:text-gray-900">Optimise</span>
                         </span>
                     </a>
                 </li>
             </ol>
         </nav>
+           <button type="button" class="flex-none w-32 inline-flex items-center gap-x-1.5 rounded-md bg-indigo-600 px-4 py-1 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+               Optimise
+
+           </button>
        </div>
         <form method="dialog" th:action="@{/plans}" th:object="${plan}"
+              class="mt-5"
         >
             <div class="grid grid-cols-6 gap-3 mt-1">
-                <div class="col-span-6" ><p class="text-2xl text-blue-800 font-bold">New Plan</p></div>
-
                 <div class="text-start col-span-3">
                     <lable class="text-lg font-semibold">Description</lable> <br>
                     <input id="plan-description" type="text" name="plan-description"
@@ -89,11 +92,6 @@
                     </select>
                 </div>
 
-            </div>
-
-            <div class="flex flex-row w-full mt-5 gap-5">
-                <button class="rounded-md bg-indigo-500 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">Save Plan</button>
-                <button class="rounded-md bg-indigo-500 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">Cancel</button>
             </div>
 
             <div id="batch-orders-list" class="batch-orders-list mx-auto flex w-full items-start gap-x-8 px-4 py-10 sm:px-6 lg:px-8">
