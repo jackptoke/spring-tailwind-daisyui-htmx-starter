@@ -2,6 +2,7 @@ package dev.toke.springthymehtmxstarter.controller;
 
 import dev.toke.springthymehtmxstarter.data.dto.UserDto;
 import dev.toke.springthymehtmxstarter.data.model.User;
+import dev.toke.springthymehtmxstarter.service.AmeUserService;
 import dev.toke.springthymehtmxstarter.service.RoleService;
 import dev.toke.springthymehtmxstarter.service.UserService;
 import io.github.wimdeblauwe.htmx.spring.boot.mvc.HtmxResponse;
@@ -21,6 +22,7 @@ import java.util.List;
 public class UserController {
     private final UserService userService;
     private final RoleService roleService;
+    private final AmeUserService ameUserService;
 
     @GetMapping
     public String index(Model model) {
@@ -54,11 +56,11 @@ public class UserController {
         return "users/index";
     }
 
-    @GetMapping("/{username}")
-    public String show(@PathVariable String username, Model model) {
-        model.addAttribute("user", userService.findByUsername(username));
-        return "users/show";
-    }
+//    @GetMapping("/{username}")
+//    public String show(@PathVariable String username, Model model) {
+//        model.addAttribute("user", userService.findByUsername(username));
+//        return "users/show";
+//    }
 
     @PostMapping
     public HtmxResponse addUser(@Valid @ModelAttribute("user") User user, Model model) {
@@ -98,6 +100,7 @@ public class UserController {
     private void addAttributesForIndex(Model model, ListFilter listFilter) {
         model.addAttribute("users", getUsers(listFilter));
         model.addAttribute("numberOfUsers", userService.findAll().size());
+        model.addAttribute("ameUsers", ameUserService.getUsers());
     }
 
     private List<UserDto> convertToDto(List<User> users) {

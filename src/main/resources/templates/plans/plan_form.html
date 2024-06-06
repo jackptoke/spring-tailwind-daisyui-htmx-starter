@@ -3,8 +3,8 @@
       xmlns:th="http://www.thymeleaf.org"
 >
 <body>
-    <div th:fragment="plan-form(plan, priorities, unplannedBatches)" id="plan-form" class="container mx-auto flex min-h-dvh flex-col">
-       <div class="flex flex-row">
+    <div th:fragment="plan-form(plan, priorities, workOrders)" id="plan-form" class="container mx-auto flex min-h-dvh flex-col">
+       <div class="flex flex-row w-full justify-between">
         <nav aria-label="Progress" class="md:flex md:items-center md:justify-between">
             <ol role="list" class="divide-y divide-gray-300 rounded-md border border-gray-300 md:flex md:divide-y-0">
                 <li class="relative md:flex md:flex-1">
@@ -14,7 +14,7 @@
                           <span class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full border-2 border-indigo-600 group-hover:bg-blue-700">
                             <span class="text-indigo-600 group-hover:text-white">01</span>
                           </span>
-                          <span class="ml-4 text-sm font-medium text-indigo-600">Create Plan</span>
+                          <span class="ml-4 text-sm font-medium text-indigo-600">Create</span>
                         </span>
                     </a>
                     <!-- Arrow separator for lg screens and up -->
@@ -33,7 +33,7 @@
                             <span class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full border-2 border-gray-300 group-hover:border-gray-400">
                               <span class="text-gray-500 group-hover:text-gray-900">02</span>
                             </span>
-                            <span class="ml-4 text-sm font-medium text-gray-500 group-hover:text-gray-900">Machine Configuration</span>
+                            <span class="ml-4 text-sm font-medium text-gray-500 group-hover:text-gray-900">Optimize</span>
                         </span>
                     </a>
                     <!-- Arrow separator for lg screens and up -->
@@ -50,15 +50,22 @@
                           <span class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full border-2 border-gray-300 group-hover:border-gray-400">
                             <span class="text-gray-500 group-hover:text-gray-900">03</span>
                           </span>
-                          <span class="ml-4 text-sm font-medium text-gray-500 group-hover:text-gray-900">Optimise</span>
+                          <span class="ml-4 text-sm font-medium text-gray-500 group-hover:text-gray-900">Review</span>
                         </span>
                     </a>
                 </li>
             </ol>
         </nav>
            <button type="button" class="flex-none w-32 inline-flex items-center gap-x-1.5 rounded-md bg-indigo-600 px-4 py-1 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-               Optimise
+               Create
+               <svg fill="#FFFFFF" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                    width="24px" height="24px" viewBox="0 0 51.388 51.388"
+                    xml:space="preserve">
+                        <path d="M9.169,51.388c-0.351,0-0.701-0.157-0.93-0.463c-0.388-0.514-0.288-1.243,0.227-1.634l31.066-23.598L8.461,2.098
+                            C7.95,1.708,7.85,0.977,8.237,0.463c0.395-0.517,1.126-0.615,1.64-0.225l33.51,25.456L9.877,51.151
+                            C9.664,51.31,9.415,51.388,9.169,51.388z"/>
 
+                    </svg>
            </button>
        </div>
         <form method="dialog" th:action="@{/plans}" th:object="${plan}"
@@ -66,7 +73,7 @@
         >
             <div class="grid grid-cols-6 gap-3 mt-1">
                 <div class="text-start col-span-3">
-                    <lable class="text-lg font-semibold">Description</lable> <br>
+                    <lable class="text-sm">Description</lable> <br>
                     <input id="plan-description" type="text" name="plan-description"
                            class="input iborder-2 border-gray-300 rounded px-3 py-2 w-full"
                            placeholder="Description"
@@ -75,27 +82,26 @@
                 </div>
 
                 <div class="text-start  col-span-1">
-                    <lable class="text-lg font-semibold">Start Date</lable> <br>
+                    <lable class="text-sm">Start Date</lable> <br>
                     <input id="datepicker-start" class="datepicker border-2 border-gray-300 rounded px-3 py-2 w-56" type="date"
                            placeholder="Select a date">
                 </div>
 
                 <div class="text-start  col-span-1 w-full">
-                    <lable class="text-lg font-semibold">Released by</lable> <br>
+                    <lable class="text-sm">Released by</lable> <br>
                     <input id="datepicker-run" class="datepicker border-2 border-gray-300 rounded px-3 py-2 w-56" type="date"
                            placeholder="Select a date">
                 </div>
                 <div class="text-start  w-full col-span-1">
-                    <lable class="text-lg font-semibold">Priority</lable> <br>
+                    <lable class="text-sm">Priority</lable> <br>
                     <select class="select border-2 border-gray-300 rounded px-3 py-2 w-56  col-span-2">
                         <option th:each="priority : ${priorities}" th:text="${priority}" th:value="${priority}"></option>
                     </select>
                 </div>
-
             </div>
 
             <div id="batch-orders-list" class="batch-orders-list mx-auto flex w-full items-start gap-x-8 px-4 py-10 sm:px-6 lg:px-8">
-                <main class="flex-1">
+                <main class="flex-1 border-r border-gray-200">
                     <form>
                         <table class="w-full">
                             <tr>
@@ -106,33 +112,29 @@
                                 <th>Quantity</th>
                                 <th># Cicuits</th>
                                 <th># Terminals</th>
-                                <th></th>
+                                <th><a href="#" class="text-indigo-600 hover:text-indigo-900">Add all<span class="sr-only">Move to a different machine</span></a></th>
                             </tr>
-                            <tr th:each="batch : ${unplannedBatches}" x-data="{ selected: false }">
+                            <tr th:each="batch : ${workOrders}" x-data="{ selected: false }">
                                 <td ><input type="checkbox"
                                             th:id="${batch.getId()}"
-                                            th:checked="${batch.getSelected()}"
+                                            th:checked="${false}"
                                             class="checkbox"
                                             @change="selected = !selected"
                                 /></td>
                                 <td th:text="${batch.getId()}"></td>
-                                <td th:text="${batch.getHarness()}"></td>
+                                <td th:text="${batch.getPartNumber()}"></td>
                                 <td th:text="${batch.getRevision()}"></td>
                                 <td th:text="${batch.getQuantity()}"></td>
-                                <td th:text="${batch.getCircuitCount()}"></td>
-                                <td th:text="${batch.getTerminationCount()}"></td>
-                                <td x-text="selected"></td>
+                                <td th:text="${batch.getReleaseByDate()}"></td>
+                                <td th:text="${batch.getDispatchByDate()}"></td>
+                                <td>
+                                    <a href="#" class="text-indigo-600 hover:text-indigo-900">Add<span class="sr-only">Add the order to the new plan</span></a>
+                                </td>
                             </tr>
                         </table>
                     </form>
                 </main>
 
-                <aside class="top-8 w-24 lg:block">
-                    <div class="flex flex-col space-y-5">
-                        <button class="rounded bg-indigo-500 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">&gt;&gt;</button>
-                        <button class="rounded bg-indigo-500 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">&lt;&lt;</button>
-                    </div>
-                </aside>
                 <aside class="flex-1">
                     <form class="w-full">
                         <table class="w-full">
@@ -144,9 +146,24 @@
                                 <th>Quantity</th>
                                 <th># Cicuits</th>
                                 <th># Terminals</th>
-                                <th></th>
+                                <th><button class="flex-none w-24 inline-flex items-center gap-x-1.5 rounded-md bg-red-500 px-4 py-1 text-sm font-semibold text-white shadow-sm hover:bg-red-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600">
+                                    Remove
+                                </button></th>
                             </tr>
-
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="text-center">
+                                    <button class="flex-none w-24 inline-flex items-center gap-x-1.5 rounded-md bg-red-500 px-4 py-1 text-sm font-semibold text-white shadow-sm hover:bg-red-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600">
+                                        Remove
+                                    </button>
+                                </td>
+                            </tr>
                         </table>
                     </form>
                 </aside>

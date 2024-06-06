@@ -33,7 +33,7 @@
                 <li class="relative md:flex md:flex-1">
                     <!-- Completed Step -->
                     <a href="#" class="group flex w-full items-center"
-                       th:hx-get="@{/plans/new}"
+                       th:hx-get="@{/plans/machines}"
                        hx-target="#plan_page_content"
                     >
                     <span class="flex items-center px-6 py-4 text-sm font-medium">
@@ -42,7 +42,7 @@
                           <path fill-rule="evenodd" d="M19.916 4.626a.75.75 0 01.208 1.04l-9 13.5a.75.75 0 01-1.154.114l-6-6a.75.75 0 011.06-1.06l5.353 5.353 8.493-12.739a.75.75 0 011.04-.208z" clip-rule="evenodd" />
                         </svg>
                       </span>
-                      <span class="ml-4 text-sm font-medium text-gray-900">Machine Configuration</span>
+                      <span class="ml-4 text-sm font-medium text-gray-900">Optimize</span>
                     </span>
                     </a>
                     <!-- Arrow separator for lg screens and up -->
@@ -59,7 +59,7 @@
                                 <span class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full border-2 border-indigo-600 group-hover:bg-blue-700">
                                   <span class="text-indigo-600 group-hover:text-white">03</span>
                                 </span>
-                        <span class="ml-4 text-sm font-medium text-indigo-600">Optimize</span>
+                        <span class="ml-4 text-sm font-medium text-indigo-600">Review</span>
                         </span>
                     </a>
                     <!-- Arrow separator for lg screens and up -->
@@ -72,7 +72,15 @@
             </ol>
         </nav>
             <button type="button" class="flex-none w-32 inline-flex items-center gap-x-1.5 rounded-md bg-indigo-600 px-4 py-1 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                Optimise
+                Send
+                <svg fill="#FFFFFF" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                     width="24px" height="24px" viewBox="0 0 51.388 51.388"
+                     xml:space="preserve">
+                        <path d="M9.169,51.388c-0.351,0-0.701-0.157-0.93-0.463c-0.388-0.514-0.288-1.243,0.227-1.634l31.066-23.598L8.461,2.098
+                            C7.95,1.708,7.85,0.977,8.237,0.463c0.395-0.517,1.126-0.615,1.64-0.225l33.51,25.456L9.877,51.151
+                            C9.664,51.31,9.415,51.388,9.169,51.388z"/>
+
+                    </svg>
             </button>
         </div>
         <div class="mx-auto w-full grow py-6 lg:flex xl:px-2">

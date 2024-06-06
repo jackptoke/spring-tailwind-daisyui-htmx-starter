@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <body>
-    <div id="user-list" class="user-list px-4 sm:px-6 lg:px-8 w-full">
+    <div th:fragment="user-list(ameUsers)" id="user-list" class="user-list px-4 sm:px-6 lg:px-8 w-full">
         <div class="flex flex-row justify-between sm:items-center">
             <div class="sm:flex-auto">
                 <h1 class="text-base font-semibold leading-6 text-gray-900">Users</h1>
@@ -37,18 +37,18 @@
                         <tbody>
                         <!-- row 1 -->
                         <tr id="user-detail" class="user-detail"
-                            th:each="user : ${ users }">
-                            <th class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" th:text="${user.id()}">1</th>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" th:text="${user.username()}">Cy Ganderton</td>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" th:text="${user.email()}">Quality Control Specialist</td>
+                            th:each="user : ${ ameUsers }">
+                            <th class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" th:text="${user.getUserId()}">1</th>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" th:text="${user.getUsername()}">Cy </td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" th:text="${user.getFullName()}">Q</td>
                             <td class="text-center">
-                                <input type="checkbox" class="toggle toggle-success" th:checked="${ user.isActive() }" />
+                                <input type="checkbox" class="toggle toggle-success" th:checked="${ user.getLocationId() }" />
                             </td>
                             <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                                 <button
                                         class="rounded-md bg-green-700 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-red-600 focus-visible:outline-red-600 w-16"
                                         hx-swap="outerHTML"
-                                        th:hx-delete="@{/users/{username}(username=${user.username()})}"
+                                        th:hx-delete="@{/users/{username}(username=${user.getUsername()})}"
                                         hx-target="closest #users"
                                 >
                                     Edit
@@ -56,7 +56,7 @@
                                 <button
                                         class="rounded-md bg-red-500 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-red-600 focus-visible:outline-red-600 w-16"
                                         hx-swap="outerHTML"
-                                        th:hx-delete="@{/users/{username}(username=${user.username()})}"
+                                        th:hx-delete="@{/users/{username}(username=${user.getUsername()})}"
                                         hx-target="closest #users"
                                 >
                                     Delete

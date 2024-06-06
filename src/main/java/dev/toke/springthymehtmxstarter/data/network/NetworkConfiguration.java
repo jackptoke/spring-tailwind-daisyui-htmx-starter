@@ -1,9 +1,6 @@
 package dev.toke.springthymehtmxstarter.data.network;
 
-import dev.toke.springthymehtmxstarter.data.api.MachineApi;
-import dev.toke.springthymehtmxstarter.data.api.ProductApi;
-import dev.toke.springthymehtmxstarter.data.api.WorkOrderApi;
-import dev.toke.springthymehtmxstarter.data.api.WorkPlanApi;
+import dev.toke.springthymehtmxstarter.data.api.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -56,5 +53,10 @@ public class NetworkConfiguration {
     @Bean
     public MachineApi machineApi(HttpServiceProxyFactory httpServiceProxyFactory) {
         return httpServiceProxyFactory.createClient(MachineApi.class);
+    }
+
+    @Bean
+    public UserApi userApi(HttpServiceProxyFactory httpServiceProxyFactory) {
+        return httpServiceProxyFactory.createClient(UserApi.class);
     }
 }

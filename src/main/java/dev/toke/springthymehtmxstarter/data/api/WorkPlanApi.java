@@ -17,6 +17,9 @@ public interface WorkPlanApi {
     @GetExchange("/plans/{planId}")
     WorkPlanDto getWorkPlan(@PathVariable(name = "planId") Long planId);
 
+    @GetExchange("/plans/{planId}/greater-or-equals")
+    List<WorkPlanDto> getWorkPlansGreaterThanOrEqual(@PathVariable(name="planId") Long planId);
+
     @GetExchange("/plans/{planId}/jobs")
     List<CuttingJobDto> getCuttingJobs(@PathVariable(name = "planId") Long planId);
 }

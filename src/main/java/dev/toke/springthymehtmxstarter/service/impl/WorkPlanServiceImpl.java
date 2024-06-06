@@ -20,6 +20,11 @@ public class WorkPlanServiceImpl implements WorkPlanService {
     }
 
     @Override
+    public List<WorkPlanDto> getWorkPlansGreaterThan(Long planId) {
+        return workPlanApi.getWorkPlansGreaterThanOrEqual(planId);
+    }
+
+    @Override
     public WorkPlanDto getWorkPlanById(Long id) {
         return null;
     }

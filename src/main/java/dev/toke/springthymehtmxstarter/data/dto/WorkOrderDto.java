@@ -21,7 +21,7 @@ public class WorkOrderDto {
     private Boolean isCompleted;
     private String status;
     private String specialCode;
-    private String unitOfMaesurement;
+    private String unitOfMeasurement;
     private Integer quantityIssued;
     private Boolean plDone;
     private Boolean isUnReleased;

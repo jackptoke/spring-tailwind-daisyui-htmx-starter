@@ -7,16 +7,18 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class WorkOrderServiceImpl implements WorkOrderService {
     private final WorkOrderApi workOrderApi;
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     @Override
     public List<WorkOrderDto> getWorkOrders(LocalDate releaseDateFrom, String status) {
-        return workOrderApi.getWorkOrders(releaseDateFrom, status);
+        return workOrderApi.getWorkOrders(releaseDateFrom.format(formatter), status);
     }
 
     @Override

@@ -1,13 +1,11 @@
 package dev.toke.springthymehtmxstarter.controller;
 
-import dev.toke.springthymehtmxstarter.data.dto.BatchOrderData;
-import dev.toke.springthymehtmxstarter.data.dto.MachineConfigFormData;
-import dev.toke.springthymehtmxstarter.data.dto.PlanFormData;
-import dev.toke.springthymehtmxstarter.data.dto.WorkPlanDto;
+import dev.toke.springthymehtmxstarter.data.dto.*;
 import dev.toke.springthymehtmxstarter.data.dto.display.PlanDisplay;
 import dev.toke.springthymehtmxstarter.data.model.PlanPriority;
 import dev.toke.springthymehtmxstarter.service.BatchOrderService;
 import dev.toke.springthymehtmxstarter.service.MachineService;
+import dev.toke.springthymehtmxstarter.service.WorkOrderService;
 import dev.toke.springthymehtmxstarter.service.WorkPlanService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.TemporalAdjusters;
 
 @Controller
@@ -32,35 +29,31 @@ public class PlanController {
     private final WorkPlanService workPlanService;
     private final BatchOrderService batchOrderService;
     private final MachineService machineService;
+    private final WorkOrderService workOrderService;
 
     @GetMapping
     public String index(Model model) {
-        LocalDate from = LocalDate.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), 1);
-        LocalDate to = from.plusDays(14);
-        var plans = workPlanService.getWorkPlans(from, to);
+//        LocalDate from = LocalDate.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), 1);
+//        LocalDate to = from.plusDays(14);
+        Long startPlanId = 7660L;
+        var plans = workPlanService.getWorkPlansGreaterThan(startPlanId);
         var plansDisplay = plans.stream().map(this::convertPlanDtoToPlanDisplay).toList();
         model.addAttribute("plans", plansDisplay);
-        var p = plansDisplay.get(0);
-        p.computerName();
-        p.description();
-        p.id();
-        p.machineConfig();
-        p.priority();
-        p.productionStatus();
-        p.runDate();
-        p.startDate();
-        p.endDate();
-        p.transferStatus();
         return "plans/index";
     }
 
     @GetMapping("/new")
     public String newPlan(Model model) {
         log.info("New plan");
+        LocalDate today = LocalDate.of(2024, 5, 15);
+        var workOrders = workOrderService.getWorkOrders(today, null);
         model.addAttribute("plan", new PlanFormData());
         model.addAttribute("priorities", PlanPriority.values());
+        model.addAttribute("workOrders", workOrders);
+        WorkOrderDto test = new WorkOrderDto();
+
         var unplannedBatches = batchOrderService.getUnplannedBatchOrders().stream().map(BatchOrderData::from);
-        model.addAttribute("unplannedBatches", unplannedBatches);
+//        model.addAttribute("unplannedBatches", unplannedBatches);
 
         return "plans/plan_form :: plan-form";
     }
