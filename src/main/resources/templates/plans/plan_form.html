@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org"
 >
 <body>
-    <div th:fragment="plan-form(plan, priorities, workOrders)" id="plan-form" class="container mx-auto flex min-h-dvh flex-col">
+    <div th:fragment="plan-form(plan, priorities, workOrders, plannedWorkOrders)" id="plan-form" class="container mx-auto flex min-h-dvh flex-col">
        <div class="flex flex-row w-full justify-between">
         <nav aria-label="Progress" class="md:flex md:items-center md:justify-between">
             <ol role="list" class="divide-y divide-gray-300 rounded-md border border-gray-300 md:flex md:divide-y-0">
@@ -128,7 +128,9 @@
                                 <td th:text="${batch.getReleaseByDate()}"></td>
                                 <td th:text="${batch.getDispatchByDate()}"></td>
                                 <td>
-                                    <a href="#" class="text-indigo-600 hover:text-indigo-900">Add<span class="sr-only">Add the order to the new plan</span></a>
+                                    <button class="flex-none w-24 inline-flex items-center gap-x-1.5 rounded-md bg-green-600 px-4 py-1 text-sm font-semibold text-white shadow-sm hover:bg-green-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-700">
+                                        Add
+                                    </button>
                                 </td>
                             </tr>
                         </table>
@@ -150,7 +152,7 @@
                                     Remove
                                 </button></th>
                             </tr>
-                            <tr>
+                            <tr th:each="pOrder : ${plannedWorkOrders}">
                                 <td></td>
                                 <td></td>
                                 <td></td>

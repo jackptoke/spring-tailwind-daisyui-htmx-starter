@@ -20,6 +20,8 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/plans")
@@ -47,9 +49,11 @@ public class PlanController {
         log.info("New plan");
         LocalDate today = LocalDate.of(2024, 5, 15);
         var workOrders = workOrderService.getWorkOrders(today, null);
+        var plannedWorkOrders = new ArrayList<WorkOrderDto>();
         model.addAttribute("plan", new PlanFormData());
         model.addAttribute("priorities", PlanPriority.values());
         model.addAttribute("workOrders", workOrders);
+        model.addAttribute("plannedWorkOrders", plannedWorkOrders);
         WorkOrderDto test = new WorkOrderDto();
 
         var unplannedBatches = batchOrderService.getUnplannedBatchOrders().stream().map(BatchOrderData::from);
