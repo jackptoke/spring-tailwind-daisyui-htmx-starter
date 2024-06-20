@@ -1,6 +1,7 @@
 package dev.toke.springthymehtmxstarter.data.api;
 
 import dev.toke.springthymehtmxstarter.data.dto.WorkOrderDto;
+import dev.toke.springthymehtmxstarter.data.dto.WorkOrderWithCircuitCountDto;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.service.annotation.GetExchange;
 
@@ -13,4 +14,9 @@ public interface WorkOrderApi {
                                      @RequestParam(value = "status", required = false) String status);
     @GetExchange("/work-orders/{workOrderId}")
     WorkOrderDto getWorkOrder(@RequestParam(value = "workOrderId") Long workOrderId);
+
+    @GetExchange("/work-orders/with-circuits")
+    List<WorkOrderWithCircuitCountDto> getUnassignedWorkOrdersWithCircuitCount(
+            @RequestParam(value = "releaseDueDate") String releaseDueDate
+    );
 }

@@ -107,11 +107,13 @@
                             <tr>
                                 <th><input type="checkbox" th:checked="checked" class="checkbox" /></th>
                                 <th>Order #</th>
+                                <th>Customer</th>
                                 <th>Harness</th>
                                 <th>Revision</th>
                                 <th>Quantity</th>
+                                <th>Status</th>
                                 <th># Cicuits</th>
-                                <th># Terminals</th>
+                                <th># Wires</th>
                                 <th><a href="#" class="text-indigo-600 hover:text-indigo-900">Add all<span class="sr-only">Move to a different machine</span></a></th>
                             </tr>
                             <tr th:each="batch : ${workOrders}" x-data="{ selected: false }">
@@ -122,10 +124,12 @@
                                             @change="selected = !selected"
                                 /></td>
                                 <td th:text="${batch.getId()}"></td>
+                                <td th:text="${batch.getCustomer()}"></td>
                                 <td th:text="${batch.getPartNumber()}"></td>
                                 <td th:text="${batch.getRevision()}"></td>
-                                <td th:text="${batch.getQuantity()}"></td>
                                 <td th:text="${batch.getReleaseByDate()}"></td>
+                                <td th:text="${batch.getStatus()}"></td>
+                                <td th:text="${batch.getQuantity()}"></td>
                                 <td th:text="${batch.getDispatchByDate()}"></td>
                                 <td>
                                     <button class="flex-none w-24 inline-flex items-center gap-x-1.5 rounded-md bg-green-600 px-4 py-1 text-sm font-semibold text-white shadow-sm hover:bg-green-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-700">
