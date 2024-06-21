@@ -1,11 +1,9 @@
 package dev.toke.springthymehtmxstarter.data.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,4 +19,10 @@ public class WorkOrderWithCircuitCountDto {
     private Integer quantity;
     private Integer circuitsPerHarness;
     private Integer totalCircuits;
+//    @Setter(AccessLevel.NONE)
+    public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+    public String releaseDueDateToString() {
+        return releaseDueOn.format(formatter);
+    }
 }

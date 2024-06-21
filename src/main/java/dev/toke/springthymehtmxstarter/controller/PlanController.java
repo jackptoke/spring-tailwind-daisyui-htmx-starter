@@ -48,8 +48,8 @@ public class PlanController {
     public String newPlan(Model model) {
         log.info("New plan");
         LocalDate today = LocalDate.of(2024, 5, 15);
-        var workOrders = workOrderService.getWorkOrders(today, null);
-        var plannedWorkOrders = new ArrayList<WorkOrderDto>();
+        var workOrders = workOrderService.getUnplannedWorkOrders(today);
+        var plannedWorkOrders = new ArrayList<WorkOrderWithCircuitCountDto>();
         model.addAttribute("plan", new PlanFormData());
         model.addAttribute("priorities", PlanPriority.values());
         model.addAttribute("workOrders", workOrders);
