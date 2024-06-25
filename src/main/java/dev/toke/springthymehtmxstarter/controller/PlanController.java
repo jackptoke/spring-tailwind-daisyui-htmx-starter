@@ -50,16 +50,36 @@ public class PlanController {
         LocalDate today = LocalDate.of(2024, 5, 15);
         var workOrders = workOrderService.getUnplannedWorkOrders(today);
         var plannedWorkOrders = new ArrayList<WorkOrderWithCircuitCountDto>();
+        var orderIds = workOrders.stream().map(WorkOrderWithCircuitCountDto::getId).toList();
         model.addAttribute("plan", new PlanFormData());
         model.addAttribute("priorities", PlanPriority.values());
         model.addAttribute("workOrders", workOrders);
         model.addAttribute("plannedWorkOrders", plannedWorkOrders);
+        model.addAttribute("orderIds", orderIds);
         WorkOrderDto test = new WorkOrderDto();
 
         var unplannedBatches = batchOrderService.getUnplannedBatchOrders().stream().map(BatchOrderData::from);
 //        model.addAttribute("unplannedBatches", unplannedBatches);
 
-        return "plans/plan_form :: plan-form";
+        return "plans/plan_form";
+    }
+
+    @GetMapping("/{planId}")
+    public String planDetail(Model model, @PathVariable Integer planId) {
+        var plan = workPlanService.getWorkPlanById(planId);
+        var plannedWorkOrders = workOrderService.getPlannedWorkOrders(planId);
+        model.addAttribute("plan", plan);
+        model.addAttribute("workOrders", plannedWorkOrders);
+        return "plans/plan_detail";
+    }
+
+    @GetMapping("/planned")
+    public String planned(Model model, @PathVariable(name = "planId") Integer planId) {
+
+        var plannedWorkOrders = workOrderService.getPlannedWorkOrders(planId);
+        model.addAttribute("plannedWorkOrders", plannedWorkOrders);
+
+        return "plans/planned_form";
     }
 
     @GetMapping("/machines")

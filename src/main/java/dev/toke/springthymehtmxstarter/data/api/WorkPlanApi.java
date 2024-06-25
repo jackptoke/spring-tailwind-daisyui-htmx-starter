@@ -15,7 +15,7 @@ public interface WorkPlanApi {
             @RequestParam(name = "endDate", required = false) String endDate);
 
     @GetExchange("/plans/{planId}")
-    WorkPlanDto getWorkPlan(@PathVariable(name = "planId") Long planId);
+    WorkPlanDto getWorkPlan(@PathVariable(name = "planId") Integer planId);
 
     @GetExchange("/plans/{planId}/greater-or-equals")
     List<WorkPlanDto> getWorkPlansGreaterThanOrEqual(@PathVariable(name="planId") Long planId);

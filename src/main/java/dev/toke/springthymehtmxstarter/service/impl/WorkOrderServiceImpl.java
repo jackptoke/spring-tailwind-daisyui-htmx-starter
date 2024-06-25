@@ -28,6 +28,12 @@ public class WorkOrderServiceImpl implements WorkOrderService {
     }
 
     @Override
+    public List<WorkOrderWithCircuitCountDto> getPlannedWorkOrders(Integer planId) {
+        return workOrderApi.getPlannedWorkOrdersByPlanId(planId);
+    }
+
+
+    @Override
     public WorkOrderDto getWorkOrder(long id) {
         return workOrderApi.getWorkOrder(id);
     }

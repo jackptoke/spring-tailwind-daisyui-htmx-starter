@@ -2,9 +2,15 @@
 <html th:lang="|${#locale.language}-${#locale.country}|"
       xmlns:th="http://www.thymeleaf.org"
 >
+
 <body>
-    <div th:fragment="plan-form(plan, priorities, workOrders, plannedWorkOrders)" id="plan-form" class="container mx-auto flex min-h-dvh flex-col">
-       <div class="flex flex-row w-full justify-between">
+    <div th:fragment="plan-form(plan, priorities, workOrders, plannedWorkOrders, orderIds)"
+         id="plan-form" class="container mx-auto flex min-h-dvh flex-col"
+         th:x-data="'ordersData(' + *{ orderIds } + ')'"
+    >
+
+
+        <div class="flex flex-row w-full justify-between"            >
         <nav aria-label="Progress" class="md:flex md:items-center md:justify-between">
             <ol role="list" class="divide-y divide-gray-300 rounded-md border border-gray-300 md:flex md:divide-y-0">
                 <li class="relative md:flex md:flex-1">
@@ -110,7 +116,7 @@
                         <span aria-hidden="true" class="absolute inset-x-0 bottom-0 h-0.5 bg-indigo-500"></span>
                     </a>
                     <a href="#" class="group relative min-w-0 flex-1 overflow-hidden bg-white px-4 py-4 text-center text-sm font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-700 focus:z-10">
-                        <span>Planned Batches</span>
+                        <span x-text="numberOfOrdersSelected">5</span><span> selected</span>
                         <span aria-hidden="true" class="absolute inset-x-0 bottom-0 h-0.5 bg-transparent"></span>
                     </a>
                 </nav>
@@ -119,10 +125,10 @@
 
             <div id="batch-orders-list" class="batch-orders-list mx-auto flex w-full items-start gap-x-8 px-4 py-10 sm:px-6 lg:px-8">
                 <main class="flex-1 border-r border-gray-200">
-                    <form>
+                    <form >
                         <table class="w-full">
                             <tr>
-                                <th><input type="checkbox" th:checked="checked" class="checkbox" /></th>
+                                <th  class="px-4 text-center relative pl-3 pr-4 sm:pr-0"><input type="checkbox" th:checked="checked" class="checkbox" /></th>
                                 <th class="text-start">Order #</th>
                                 <th class="text-start">Customer</th>
                                 <th class="text-start">Harness</th>
@@ -135,7 +141,7 @@
                                 <th><a href="#" class="text-indigo-600 hover:text-indigo-900">Add all<span class="sr-only">Move to a different machine</span></a></th>
                             </tr>
                             <tr th:each="batch : ${workOrders}" x-data="{ selected: false }">
-                                <td ><input type="checkbox"
+                                <td  class="px-4 text-center relative pl-3 pr-4 sm:pr-0"><input type="checkbox"
                                             th:id="${batch.getId()}"
                                             th:checked="${false}"
                                             class="checkbox"
@@ -151,7 +157,10 @@
                                 <td class="text-center" th:text="${batch.getCircuitsPerHarness()}"></td>
                                 <td class="text-center" th:text="${batch.getTotalCircuits()}"></td>
                                 <td class="text-center">
-                                    <button class="flex-none w-24 inline-flex items-center gap-x-1.5 rounded-md bg-green-600 px-4 py-1 text-sm font-semibold text-white shadow-sm hover:bg-green-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-700">
+                                    <button
+                                            class="flex-none w-24 inline-flex items-center gap-x-1.5 rounded-md bg-green-600 px-4 py-1 text-sm font-semibold text-white shadow-sm hover:bg-green-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-700"
+                                            th:onclick="|toggle(${batch.getId()})|"
+                                    >
                                         Add
                                     </button>
                                 </td>
@@ -164,5 +173,38 @@
         </form>
 
     </div>
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('ordersData', (initialOpenState = []) => ({
+                selected_orders: [],
+                orderIds: initialOpenState,
+                numberOfOrdersSelected: 5,
+                toggleAll() {
+                    if (this.selected_orders.length === this.orderIds.length) {
+                        this.selected_orders = []
+                    } else {
+                        this.selected_orders = this.orderIds
+                    }
+
+                },
+                isAllSelected() {
+                    return this.selected_orders.length === this.orderIds.length
+                },
+                isSelected(orderId) {
+                    return this.selected_orders.includes(orderId)
+                },
+                toggle(orderId) {
+                    if (this.isSelected(orderId)) {
+                        this.selected_orders = this.selected_orders.filter((id) => id !== orderId)
+                    } else {
+                        this.selected_orders.push(orderId)
+                    }
+
+                },
+            }))
+        })
+    </script>
 </body>
+
 </html>
+

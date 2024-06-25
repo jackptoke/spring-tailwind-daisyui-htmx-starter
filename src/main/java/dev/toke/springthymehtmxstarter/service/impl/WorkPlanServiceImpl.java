@@ -25,8 +25,8 @@ public class WorkPlanServiceImpl implements WorkPlanService {
     }
 
     @Override
-    public WorkPlanDto getWorkPlanById(Long id) {
-        return null;
+    public WorkPlanDto getWorkPlanById(Integer id) {
+        return workPlanApi.getWorkPlan(id);
     }
 
     @Override

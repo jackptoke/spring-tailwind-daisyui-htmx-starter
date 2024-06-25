@@ -9,7 +9,7 @@ import java.util.List;
 public interface WorkPlanService {
     List<WorkPlanDto> getWorkPlans(LocalDate from, LocalDate to);
     List<WorkPlanDto> getWorkPlansGreaterThan(Long planId);
-    WorkPlanDto getWorkPlanById(Long id);
+    WorkPlanDto getWorkPlanById(Integer id);
     WorkPlanDto createWorkPlan(WorkPlanDto workPlanDto);
     List<CuttingJobDto> getCuttingJobs(Long id);
 //    WorkPlan updateWorkPlan(WorkPlan workPlan);

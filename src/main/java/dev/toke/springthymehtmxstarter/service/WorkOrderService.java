@@ -9,5 +9,6 @@ import java.util.List;
 public interface WorkOrderService {
     List<WorkOrderDto> getWorkOrders(LocalDate releaseDateFrom, String status);
     List<WorkOrderWithCircuitCountDto> getUnplannedWorkOrders(LocalDate releaseDueDate);
+    List<WorkOrderWithCircuitCountDto> getPlannedWorkOrders(Integer planId);
     WorkOrderDto getWorkOrder(long id);
 }

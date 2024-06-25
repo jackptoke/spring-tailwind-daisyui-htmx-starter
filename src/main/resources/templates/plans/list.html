@@ -46,8 +46,9 @@
                         </th>
                     </tr>
                     </thead>
+                    <tbody class="divide-y divide-gray-200 bg-white">
                     <tr th:each="plan : ${ plans }">
-                        <td class="px-4 text-center relative py-3.5 pl-3 pr-4 sm:pr-0">
+                        <td class="px-4 text-center relative pl-3 pr-4 sm:pr-0">
                             <input th:id="${ 'order-id-' + plan.id() }" aria-describedby="comments-description"
                                    name="comments" type="checkbox"
                                    class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
@@ -55,21 +56,26 @@
                                    x-model="selected_orders"
                             >
                         </td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" th:text="${plan.id()}"></td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" th:text="${plan.description()}"></td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" th:text="${plan.startDate()}"></td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" th:text="${plan.endDate()}"></td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" th:text="${plan.runDate()}"></td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" th:text="${plan.priority()}"></td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" th:text="${plan.productionStatus()}"></td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" th:text="${plan.transferStatus()}"></td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" th:text="${plan.numberOfBatches()}"></td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" th:text="${plan.lastUpdateAt()}"></td>
-                        <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                            <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit<span class="sr-only">, Lindsay Walton</span></a>
+                        <td class="whitespace-nowrap px-3 text-sm text-gray-500" th:text="${plan.id()}"></td>
+                        <td class="whitespace-nowrap px-3 text-sm text-gray-500" th:text="${plan.description()}"></td>
+                        <td class="whitespace-nowrap px-3 text-sm text-gray-500" th:text="${plan.startDate()}"></td>
+                        <td class="whitespace-nowrap px-3 text-sm text-gray-500" th:text="${plan.endDate()}"></td>
+                        <td class="whitespace-nowrap px-3 text-sm text-gray-500" th:text="${plan.runDate()}"></td>
+                        <td class="whitespace-nowrap px-3 text-sm text-gray-500" th:text="${plan.priority()}"></td>
+                        <td class="whitespace-nowrap px-3 text-sm text-gray-500" th:text="${plan.productionStatus()}"></td>
+                        <td class="whitespace-nowrap px-3 text-sm text-gray-500" th:text="${plan.transferStatus()}"></td>
+                        <td class="whitespace-nowrap px-3 text-sm text-gray-500" th:text="${plan.numberOfBatches()}"></td>
+                        <td class="whitespace-nowrap px-3 text-sm text-gray-500" th:text="${plan.lastUpdateAt()}"></td>
+                        <td class="relative whitespace-nowrap pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
+                            <button
+                                    class="flex-none w-24 inline-flex items-center gap-x-1.5 rounded-md bg-blue-600 px-4 py-1 text-sm font-semibold text-white shadow-sm hover:bg-blue-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+                                    th:hx-get="${'/plans/' + plan.id()}"
+                                    hx-target="#plan_page_content"
+                            >
+                                Detail
+                            </button>
                         </td>
                     </tr>
-                    <tbody>
                     </tbody>
                 </table>
             </div>

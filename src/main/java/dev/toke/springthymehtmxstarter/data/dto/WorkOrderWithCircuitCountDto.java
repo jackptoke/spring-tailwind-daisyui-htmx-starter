@@ -14,15 +14,22 @@ public class WorkOrderWithCircuitCountDto {
     private String partNumber;
     private String revision;
     private String customer;
+    private Integer sortTypeId;
     private String status;
+    private String firstLocation;
     private LocalDateTime releaseDueOn;
+    private LocalDateTime releasedDate;
     private Integer quantity;
     private Integer circuitsPerHarness;
     private Integer totalCircuits;
-//    @Setter(AccessLevel.NONE)
+    private Integer totalTerminations;
     public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     public String releaseDueDateToString() {
         return releaseDueOn.format(formatter);
+    }
+
+    public String releasedDateToString() {
+        return releasedDate.format(formatter);
     }
 }
